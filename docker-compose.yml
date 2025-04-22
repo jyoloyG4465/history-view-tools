@@ -1,13 +1,12 @@
-version: '3.8'
-
 services:
   app:
     build: ./containers/api-server  # containers/api-serverディレクトリからビルド
     container_name: api-server  # コンテナ名を固定
     volumes:
-      - ./containers/api-server:/app  # ローカルの /containers/api-server フォルダをコンテナの /app にマウント
+      - ./containers/api-server:/code  # ローカルの /containers/api-server フォルダをコンテナの /app にマウント
     ports:
-      - "5000:5000"  # 外部アクセス用にポートを開放
+      - "8000:8000"  # 外部アクセス用にポートを開放
     # environment:
     #   - FLASK_APP=app.py
-    command: ["tail", "-f", "/dev/null"]
+    working_dir: /code
+    command: python manage.py runserver 0.0.0.0:8000
