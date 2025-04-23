@@ -2,7 +2,7 @@
 FROM python:3.13
 
 # 作業ディレクトリを指定
-WORKDIR /app
+WORKDIR /apps
 
 # requirements.txt をコンテナにコピー
 COPY requirements.txt .

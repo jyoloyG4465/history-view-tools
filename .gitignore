@@ -1,0 +1,17 @@
+# Python bytecode files
+*.pyc
+*.pyo
+__pycache__/
+
+# また、場合によっては以下も無視してもよい
+*.pyd
+*.pdb
+
+# その他、Djangoでのキャッシュやログを無視する設定
+*.log
+*.pot
+*.pyc
+*.pyo
+*.db
+*.sqlite3
+*.sqlite3-journal
