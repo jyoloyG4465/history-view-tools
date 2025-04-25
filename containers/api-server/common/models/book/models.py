@@ -4,6 +4,7 @@ class Book(models.Model):
     title = models.CharField(max_length=100)
     author = models.CharField(max_length=100)
     published_date = models.DateField()
+    aaaaaa = models.CharField(max_length=100, null=True)
 
     class Meta:
         app_label = 'apps'
