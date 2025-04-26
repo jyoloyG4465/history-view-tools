@@ -3,10 +3,19 @@ services:
     build: ./containers/api-server  # containers/api-serverディレクトリからビルド
     container_name: api-server  # コンテナ名を固定
     volumes:
-      - ./containers/api-server:/code  # ローカルの /containers/api-server フォルダをコンテナの /app にマウント
+      - ./containers/api-server:/code  # ローカルの /containers/api-server フォルダをコンテナの /code にマウント
     ports:
       - "8000:8000"  # 外部アクセス用にポートを開放
-    # environment:
-    #   - FLASK_APP=app.py
     working_dir: /code
     command: python manage.py runserver 0.0.0.0:8000
+
+
+  http-server:
+    build:
+      context: .
+      dockerfile: containers/http-server/Dockerfile
+    container_name: http-server
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./containers/http-server:/code  # index.html がここにある！
