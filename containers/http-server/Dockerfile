@@ -3,6 +3,13 @@ FROM node:18-alpine
 
 RUN npm install -g http-server
 
-WORKDIR /app
+WORKDIR /code
 
-CMD ["http-server", "-p", "8080"]
+COPY ./containers/http-server/browser-cli/package*.json ./
+
+RUN npm install -g @angular/cli \
+    && npm install
+
+EXPOSE 4200
+
+# CMD ["sh", "-c", "cd /code/browser-cli && ng serve --host 0.0.0.0"]
