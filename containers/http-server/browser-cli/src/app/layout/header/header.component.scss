@@ -1,0 +1,23 @@
+.navbar-title {
+    height: 80px;
+  
+    .title {
+        font-size: 28px;  
+        font-weight: bold;
+    }
+  }
+  
+// ナビゲーションメニュー
+.navbar-menu {
+    height: 60px; 
+
+    .nav-link {
+        font-weight: bold;
+        font-size: 18px;  
+    }
+}
+
+
+.navbar-nav .nav-item {
+    margin: 0 12px; 
+}
