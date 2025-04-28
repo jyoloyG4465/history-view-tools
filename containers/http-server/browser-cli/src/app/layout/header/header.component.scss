@@ -9,7 +9,7 @@
   
 // ナビゲーションメニュー
 .navbar-menu {
-    height: 60px; 
+    height: 54px; 
 
     .nav-link {
         font-weight: bold;
@@ -20,4 +20,10 @@
 
 .navbar-nav .nav-item {
     margin: 0 12px; 
+}
+
+.logo{
+    height: 60px;
+    margin-right: 10px;
+    margin-bottom: 6px;
 }
