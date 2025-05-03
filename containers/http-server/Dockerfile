@@ -7,9 +7,7 @@ WORKDIR /code
 
 COPY ./containers/http-server/browser-cli/package*.json ./
 
-RUN npm install @angular/cli \
+RUN npm install -g @angular/cli \
     && npm install
 
-# EXPOSE 8080
-
-# CMD ["sh", "-c", "cd /code/browser-cli && ng serve --host 0.0.0.0"]
+CMD ["sh", "-c", "cd ./browser-cli && ng serve --host 0.0.0.0"]

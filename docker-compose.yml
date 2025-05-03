@@ -16,7 +16,7 @@ services:
       dockerfile: containers/http-server/Dockerfile
     container_name: http-server
     ports:
-      - "8080:8080"
+      - "4200:4200"
     volumes:
       - ./containers/http-server:/code  # index.html がここにある！
     tty: true
