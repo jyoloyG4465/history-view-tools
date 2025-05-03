@@ -2,7 +2,9 @@
 FROM python:3.13
 
 # 作業ディレクトリを指定
-WORKDIR /apps
+WORKDIR /code
+
+RUN apt-get update && apt-get install -y netcat-openbsd && apt-get clean
 
 # requirements.txt をコンテナにコピー
 COPY requirements.txt .
@@ -12,3 +14,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # 作業ディレクトリに全てのファイルをコピー（必要なら）
 COPY . .
+
+RUN chmod +x ./entrypoint.sh

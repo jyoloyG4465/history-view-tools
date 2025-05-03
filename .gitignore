@@ -17,3 +17,5 @@ __pycache__/
 *.sqlite3-journal
 
 /node_modules/
+
+/postgres_data/

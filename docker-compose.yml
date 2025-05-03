@@ -1,5 +1,5 @@
 services:
-  app:
+  api-server:
     build: ./containers/api-server  # containers/api-serverディレクトリからビルド
     container_name: api-server  # コンテナ名を固定
     volumes:
@@ -7,7 +7,9 @@ services:
     ports:
       - "8000:8000"  # 外部アクセス用にポートを開放
     working_dir: /code
-    command: python manage.py runserver 0.0.0.0:8000
+    entrypoint: ["/bin/bash", "./entrypoint.sh"]
+    depends_on:
+      - databases
 
 
   http-server:
@@ -20,3 +22,16 @@ services:
     volumes:
       - ./containers/http-server:/code  # index.html がここにある！
     tty: true
+
+  databases:
+    image: postgres:15
+    container_name: databases
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: pguser
+      POSTGRES_PASSWORD: pgpassword
+      
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
