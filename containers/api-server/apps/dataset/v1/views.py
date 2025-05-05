@@ -1,11 +1,12 @@
 from common.models import Dataset
 from rest_framework import status
 from rest_framework.decorators import api_view
+from rest_framework.request import Request
 from rest_framework.response import Response
 
 
-@api_view(["POST", "PUT"])
-def create(request):
+@api_view(["POST"])
+def create(request: Request):
     if request.method == "POST":
         dataset_name = request.data["datasetName"]
         Dataset.objects.create(dataset_name=dataset_name, size=100)
@@ -13,7 +14,7 @@ def create(request):
 
 
 @api_view(["GET"])
-def list(request):
+def list(request: Request):
     if request.method == "GET":
         datasets = Dataset.objects.all()
         if datasets is None:
@@ -32,7 +33,7 @@ def list(request):
 
 
 @api_view(["PUT"])
-def rename(request):
+def rename(request: Request):
     if request.method == "PUT":
         dataset_id = request.data["datasetId"]
         dataset_name = request.data["datasetName"]
@@ -46,7 +47,7 @@ def rename(request):
 
 
 @api_view(["DELETE"])
-def delete(request):
+def delete(request: Request):
     if request.method == "DELETE":
         dataset_id = request.query_params.get("datasetId")
         dataset = Dataset.objects.filter(dataset_id=dataset_id).first()
