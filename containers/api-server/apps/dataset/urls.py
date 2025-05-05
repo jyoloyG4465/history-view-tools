@@ -21,4 +21,7 @@ from .v1 import views
 
 urlpatterns = [
     path("v1/create/", views.create),
+    path("v1/list/", views.list),
+    path("v1/delete/", views.delete),
+    path("v1/delete/", views.rename),
 ]
