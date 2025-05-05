@@ -5,14 +5,30 @@
   height: 100vh;
 }
 
-.content {
-  background-color: #ffffff;
-  padding: 30px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  min-height: calc(100vh - 30px);
-  box-sizing: border-box;
-  min-width: 1500px;
-  margin-right: 120px; /* 右側に余白を追加 */
+::ng-deep .nav {
+  min-width: 180px;
+  background-color: #e2e2e2;
+  font-size: 24px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-weight: bold;
+  gap: 12px;
+
+  .nav-button {
+    margin-bottom: 10px;
+
+    :hover {
+      color: #1976d2; /* 各リストアイテムのテキストを青に */
+      text-decoration: underline;
+    }
+  }
+}
+
+::ng-deep .header {
+  .code:hover {
+    text-decoration: underline;
+  }
 }
 
 .lapper {
@@ -20,6 +36,12 @@
   background-color: #e2e2e2;
 }
 
-.nav {
-  background-color: #e2e2e2;
+.content {
+  background-color: #ffffff;
+  padding: 30px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  min-height: calc(100vh - 30px);
+  box-sizing: border-box;
+  min-width: 1500px;
+  margin-right: 180px; /* 右側に余白を追加 */
 }
