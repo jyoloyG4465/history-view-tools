@@ -1,13 +1,12 @@
 /* app.component.scss */
 
-  
 .layout {
   display: flex;
   height: 100vh;
 }
-  
+
 .content {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   padding: 30px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   min-height: calc(100vh - 30px);
@@ -18,9 +17,9 @@
 
 .lapper {
   width: 100%;
-  background-color: #E2E2E2;
+  background-color: #e2e2e2;
 }
 
 .nav {
-  background-color: #E2E2E2;
+  background-color: #e2e2e2;
 }

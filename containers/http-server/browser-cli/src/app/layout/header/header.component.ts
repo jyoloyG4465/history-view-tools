@@ -8,6 +8,6 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   imports: [MatToolbarModule, MatButtonModule, RouterModule],
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {}

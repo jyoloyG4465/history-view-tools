@@ -8,9 +8,8 @@ describe('DatasetComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DatasetComponent]
-    })
-    .compileComponents();
+      imports: [DatasetComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(DatasetComponent);
     component = fixture.componentInstance;

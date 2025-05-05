@@ -6,6 +6,6 @@ import { HomeComponent } from './pages/home/home.component';
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' }, // これがリダイレクト
   { path: 'home', component: HomeComponent },
-  { path: 'dataset', component: DatasetComponent },  
-  { path: 'analysis', component: AnalysisComponent } 
+  { path: 'dataset', component: DatasetComponent },
+  { path: 'analysis', component: AnalysisComponent },
 ];

@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-dataset',
   imports: [],
   templateUrl: './dataset.component.html',
-  styleUrl: './dataset.component.scss'
+  styleUrl: './dataset.component.scss',
 })
-export class DatasetComponent {
-
-}
+export class DatasetComponent {}
