@@ -1,3 +1,3 @@
-from .book import Book
+from .dataset import Dataset
 
-__all__ = ['Book']
+__all__ = ["Dataset"]

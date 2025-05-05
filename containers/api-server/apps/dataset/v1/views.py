@@ -1,23 +1,23 @@
-from common.models import Book
+from common.models import Dataset
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 
 @api_view(["POST", "GET", "PUT", "DELETE"])
-def sample(request):
+def create(request):
     if request.method == "GET":
-        book_id = request.query_params.get("book_id")
-        book = Book.objects.filter(book_id=book_id).first()
-        if book is None:
+        dataset_id = request.query_params.get("datasetId")
+        dataset = Dataset.objects.filter(dataset_id=dataset_id).first()
+        if dataset is None:
 
             return Response({"message": "GET no books"})
 
         response = {
-            "book_id": book.book_id,
-            "title": book.title,
-            "author": book.author,
-            "published_date": book.published_date,
+            "book_id": dataset.book_id,
+            "title": dataset.title,
+            "author": dataset.author,
+            "published_date": dataset.published_date,
         }
         return Response(response)
 
