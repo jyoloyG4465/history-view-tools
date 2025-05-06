@@ -1,0 +1,31 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 30px);
+  align-items: baseline; /* 横方向の中央揃え */
+  width: 1400px; /* 横方向の中央揃え */
+  padding-left: 40px;
+}
+
+.title {
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.usage {
+  display: block;
+}
+
+.message {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.url {
+  display: block; /* 改行を反映させる */
+}
+
+.button {
+  margin-bottom: 20px;
+}

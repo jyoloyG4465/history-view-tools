@@ -1,2 +1,57 @@
-<h1>ホーム画面</h1>
+<div class="content">
+  <div class="about">
+    <div class="title">このツールについて</div>
+    <div class="message">
+      {{ "aboutMessage" | translate }}
+    </div>
+  </div>
 
+  <div class="usage">
+    <div class="title">使用方法</div>
+    <div class="message">
+      {{ "usageRules-1" | translate }}
+      <a
+        mat-button
+        [href]="'https://takeout.google.com/settings/takeout'"
+        target="_blank"
+        class="url"
+        >{{ "historyURL" | translate }}</a
+      >
+    </div>
+    <div class="message">
+      {{ "detailUsage" | translate }}
+    </div>
+    <div class="button">
+      <app-button-primary
+        class="button"
+        [label]="'詳細手順を確認'"
+        [width]="160"
+        (clicked)="onDataPrepareClick()"
+      >
+      </app-button-primary>
+    </div>
+    <div class="message">
+      {{ "usageRules-2" | translate }}
+    </div>
+    <div class="button">
+      <app-button-primary
+        class="button"
+        [label]="'データを取り込む'"
+        [width]="160"
+        (clicked)="onDatasetClick()"
+      >
+      </app-button-primary>
+    </div>
+    <div class="message">
+      {{ "usageRules-3" | translate }}
+    </div>
+    <div class="button">
+      <app-button-primary
+        [label]="'分析する'"
+        [width]="160"
+        (clicked)="onAnalysisClick()"
+      >
+      </app-button-primary>
+    </div>
+  </div>
+</div>

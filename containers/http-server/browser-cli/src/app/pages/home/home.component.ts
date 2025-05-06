@@ -1,11 +1,26 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { ButtonPrimaryComponent } from '@app/shared/button-primary/button-primary.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [TranslateModule, ButtonPrimaryComponent],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrl: './home.component.scss',
 })
 export class HomeComponent {
+  constructor(private router: Router) {}
 
+  onDataPrepareClick() {
+    this.router.navigate(['/data-preparation']);
+  }
+
+  onDatasetClick() {
+    this.router.navigate(['/dataset']);
+  }
+
+  onAnalysisClick() {
+    this.router.navigate(['/analysis']);
+  }
 }

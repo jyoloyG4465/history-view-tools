@@ -4,8 +4,12 @@
 html,
 body {
   height: 100%;
+  overflow: hidden;
 }
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+.message {
+  white-space: pre-line;
 }
