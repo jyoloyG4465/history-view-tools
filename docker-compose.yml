@@ -5,7 +5,8 @@ services:
     volumes:
       - ./containers/api-server:/code  # ローカルの /containers/api-server フォルダをコンテナの /code にマウント
     ports:
-      - "8000:8000"  # 外部アクセス用にポートを開放
+      - "8000:8000"
+      - "5678:5678"
     working_dir: /code
     entrypoint: ["/bin/bash", "./entrypoint.sh"]
     depends_on:
