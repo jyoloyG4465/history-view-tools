@@ -2,6 +2,7 @@ from apps.dataset.v1 import services
 from common.constants import Constants
 from common.models import Dataset
 from django.core.files.uploadedfile import UploadedFile
+from django.http import JsonResponse
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.request import Request
@@ -30,7 +31,7 @@ def create(request: Request):
 @api_view(["GET"])
 def get_list(_: Request):
     response = services.get_list()
-    return Response(response=response, status=status.HTTP_200_OK)
+    return Response(response, status=status.HTTP_200_OK)
 
 
 @api_view(["PUT"])
