@@ -1,6 +1,7 @@
 from apps.dataset.v1 import services
 from common.constants import Constants
 from common.models import Dataset
+from django.core.files.uploadedfile import UploadedFile
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.request import Request
@@ -9,15 +10,27 @@ from rest_framework.response import Response
 
 @api_view(["POST"])
 def create(request: Request):
+    file = request.FILES[Constants.FILE]
     dataset_name = request.data[Constants.KEY_DATASET_NAME]
-    Dataset.objects.create(dataset_name=dataset_name, size=100)
-    return Response({"message": "POST received"}, status=status.HTTP_201_CREATED)
+
+    if not isinstance(file, UploadedFile):
+        raise TypeError("無効なファイル型です")
+
+    try:
+        services.dataset_create(file, dataset_name)
+    except:
+        return Response(
+            {"error": "ファイル取り込みに失敗しました"},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+
+    return Response(status=status.HTTP_201_CREATED)
 
 
 @api_view(["GET"])
-def list(request: Request):
-    response = services.list()
-    return Response(response)
+def get_list(_: Request):
+    response = services.get_list()
+    return Response(response=response, status=status.HTTP_200_OK)
 
 
 @api_view(["PUT"])
