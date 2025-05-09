@@ -19,6 +19,6 @@ def save_dataframe_to_postgres(
 ) -> None:
     engine = _get_engine()
 
-    df.to_sql(table_name, con=engine, index=False, dtype=dtype)
+    df.to_sql(table_name, con=engine, schema="app_data", index=False, dtype=dtype)
 
     return
