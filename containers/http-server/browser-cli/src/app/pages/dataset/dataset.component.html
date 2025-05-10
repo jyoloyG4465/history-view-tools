@@ -1,1 +1,9 @@
-<h1>データセットのインポート</h1>
+<div class="content">
+  <div class="title">{{ "datasetImport" | translate }}</div>
+  <div class="import-box">
+    <app-dataset-import
+      (uploadFileEvent)="onUploadFile($event)"
+    ></app-dataset-import>
+  </div>
+  <div class="title">{{ "datasetList" | translate }}</div>
+</div>

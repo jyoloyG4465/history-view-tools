@@ -1,0 +1,49 @@
+.input-stack {
+  display: flex;
+  flex-direction: row;
+  gap: 200px;
+  margin-bottom: 30px;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.text-input {
+  width: 300px; /* 親要素いっぱいに広げる */
+  font-size: 16px;
+}
+
+.custom-file-upload {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+
+  input[type="file"] {
+    display: none;
+  }
+
+  label {
+    background-color: #ffca28;
+    color: #000;
+    padding: 12px 20px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  label:hover {
+    background-color: #ffd54f;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  }
+}

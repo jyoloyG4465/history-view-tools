@@ -1,0 +1,28 @@
+<div class="input-stack">
+  <div class="text-input">
+    <app-input-text
+      (confirmedEvent)="onValueConfirmed($event)"
+    ></app-input-text>
+  </div>
+  <div class="custom-file-upload">
+    <input type="file" id="file-upload" (change)="onFileSelected($event)" />
+    <label for="file-upload">
+      <span
+        >📁
+        {{
+          selectedFileName ? selectedFileName : ("choiceFile" | translate)
+        }}</span
+      >
+    </label>
+  </div>
+</div>
+
+<div class="button">
+  <app-button-primary
+    [label]="'upload'"
+    [width]="160"
+    [disabled]="disabledButton"
+    (clicked)="uploadFile()"
+  >
+  </app-button-primary>
+</div>

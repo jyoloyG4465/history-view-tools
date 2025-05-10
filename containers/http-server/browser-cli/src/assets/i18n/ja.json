@@ -9,5 +9,10 @@
   "dataPrepare-1": "① ページをスクロールして「YouTubeとYouTube Music」を探し、チェックボックスをオンにします。",
   "dataPrepare-2": "② 「複数の形式」を押して「YouTubeとYouTube Musicのオプション」画面を表示し、\n「履歴」が HTML になっているところを JSONに変更し、下部のOKを押します。",
   "dataPrepare-3": "③ 「YouTubeのすべてのデータが含まれます」を押して「YouTube と \nYouTube Musicのコンテンツオプション」画面を表示し、「選択をすべて解除」を押してから、\n「履歴」だけチェックボックスをオンにし、下部のOKを押します。",
-  "dataPrepare-4": "④ 次のステップに移動し 「エクスポートを作成」を押します。"
+  "dataPrepare-4": "④ 次のステップに移動し 「エクスポートを作成」を押します。",
+  "datasetImport": "データセットのインポート",
+  "datasetList": "データセット一覧",
+  "choiceFile": "ファイルを選択",
+  "upload": "アップロード",
+  "please choice file": "ファイルを選択してください"
 }

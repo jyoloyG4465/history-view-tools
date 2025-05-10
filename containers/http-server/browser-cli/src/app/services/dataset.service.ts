@@ -13,4 +13,8 @@ export class DatasetApiService {
   getDatasetList(): Observable<any> {
     return this.http.get(`${this.baseUrl}/v1/list/`);
   }
+
+  postDatasetCreate(formData: FormData): Observable<any> {
+    return this.http.post(`${this.baseUrl}/v1/create/`, formData);
+  }
 }

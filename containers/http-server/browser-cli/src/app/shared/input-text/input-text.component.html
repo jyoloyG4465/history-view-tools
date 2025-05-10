@@ -1,0 +1,8 @@
+<label for="filename">ファイル名</label>
+<input
+  type="text"
+  [(ngModel)]="inputValue"
+  class="text-input"
+  (blur)="onConfirm()"
+  (keydown.enter)="onConfirm()"
+/>
