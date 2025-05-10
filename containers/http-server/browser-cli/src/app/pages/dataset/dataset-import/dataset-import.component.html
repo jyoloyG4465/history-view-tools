@@ -19,7 +19,7 @@
 
 <div class="button">
   <app-button-primary
-    [label]="'upload'"
+    [label]="'upload' | translate"
     [width]="160"
     [disabled]="disabledButton"
     (clicked)="uploadFile()"

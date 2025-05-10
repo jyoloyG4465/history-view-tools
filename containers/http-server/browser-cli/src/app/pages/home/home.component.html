@@ -1,13 +1,13 @@
 <div class="content">
   <div class="about">
-    <div class="title">このツールについて</div>
+    <div class="title">{{ "about tools" | translate }}</div>
     <div class="message">
       {{ "aboutMessage" | translate }}
     </div>
   </div>
 
   <div class="usage">
-    <div class="title">使用方法</div>
+    <div class="title">{{ "howTo" | translate }}</div>
     <div class="message">
       {{ "usageRules-1" | translate }}
       <a
@@ -24,7 +24,7 @@
     <div class="button">
       <app-button-primary
         class="button"
-        [label]="'詳細手順を確認'"
+        [label]="'check details' | translate"
         [width]="160"
         (clicked)="onDataPrepareClick()"
       >
@@ -36,7 +36,7 @@
     <div class="button">
       <app-button-primary
         class="button"
-        [label]="'データを取り込む'"
+        [label]="'import data' | translate"
         [width]="160"
         (clicked)="onDatasetClick()"
       >
@@ -47,7 +47,7 @@
     </div>
     <div class="button">
       <app-button-primary
-        [label]="'分析する'"
+        [label]="'analyze' | translate"
         [width]="160"
         (clicked)="onAnalysisClick()"
       >

@@ -4,7 +4,7 @@
   "historyURL": "https://takeout.google.com/settings/takeout",
   "detailUsage": "【詳細な手順はこちらから】",
   "checkUsage": "手順を確認",
-  "usageRules-2": "② データセット画面から、データセットをインポートして、ツールに閲覧履歴を取り込むことができます。\n取り込まれた閲覧履歴は同画面にリスト表示され一覧として表示されます",
+  "usageRules-2": "② データセット画面から、データセット（watch-history.json）をインポートして、ツールに閲覧履歴を取り込むことができます。\n取り込まれた閲覧履歴は同画面にリスト表示され一覧として表示されます",
   "usageRules-3": "③ グラフ分析画面を開き、設定を行ってグラフ表示を選択します。グラフ種別を選択すると様々な種類で履歴を情報を取得することができます",
   "dataPrepare-1": "① ページをスクロールして「YouTubeとYouTube Music」を探し、チェックボックスをオンにします。",
   "dataPrepare-2": "② 「複数の形式」を押して「YouTubeとYouTube Musicのオプション」画面を表示し、\n「履歴」が HTML になっているところを JSONに変更し、下部のOKを押します。",
@@ -14,5 +14,10 @@
   "datasetList": "データセット一覧",
   "choiceFile": "ファイルを選択",
   "upload": "アップロード",
-  "please choice file": "ファイルを選択してください"
+  "please choice file": "ファイルを選択してください",
+  "howTo": "使用方法",
+  "check details": "詳細手順を確認",
+  "import data": "データを取り込む",
+  "analyze": "分析する",
+  "about tools": "このツールについて"
 }
