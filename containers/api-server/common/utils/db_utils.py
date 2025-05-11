@@ -2,7 +2,7 @@ import os
 from typing import Any
 
 import pandas as pd
-from sqlalchemy import Text, create_engine
+from sqlalchemy import create_engine, text
 from sqlalchemy.engine import Engine
 
 
@@ -20,5 +20,18 @@ def save_dataframe_to_postgres(
     engine = _get_engine()
 
     df.to_sql(table_name, con=engine, schema="app_data", index=False, dtype=dtype)
+
+    return
+
+
+def delete_app_data_table(table_name: str) -> None:
+    engine = _get_engine()
+
+    sql = f'DROP TABLE IF EXISTS app_data."{table_name}";'
+
+    # SQL コマンドを実行
+    with engine.connect() as connection:
+        connection.execute(text(sql))
+        connection.commit()  # コミットを追加
 
     return

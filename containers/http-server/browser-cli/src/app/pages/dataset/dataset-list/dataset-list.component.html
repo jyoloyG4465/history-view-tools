@@ -1,0 +1,9 @@
+<div class="card-container">
+  <div class="card" *ngFor="let dataset of datasetList">
+    <app-dataset-card
+      [dataset]="dataset"
+      (updateEvent)="onUpdate($event)"
+      (deleteEvent)="onDelete($event)"
+    ></app-dataset-card>
+  </div>
+</div>

@@ -1,5 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import {
+  Dataset,
+  deleteDatasetRequest,
+  postDatasetCreateResopnse,
+  putDatasetRenameRequest,
+} from '@app/models/dataset.model';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -10,11 +16,22 @@ export class DatasetApiService {
 
   constructor(private http: HttpClient) {}
 
-  getDatasetList(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/v1/list/`);
+  getDatasetList(): Observable<Dataset[]> {
+    return this.http.get<Dataset[]>(`${this.baseUrl}/v1/list/`);
   }
 
-  postDatasetCreate(formData: FormData): Observable<any> {
-    return this.http.post(`${this.baseUrl}/v1/create/`, formData);
+  postDatasetCreate(formData: FormData): Observable<postDatasetCreateResopnse> {
+    return this.http.post<postDatasetCreateResopnse>(
+      `${this.baseUrl}/v1/create/`,
+      formData
+    );
+  }
+
+  putDatasetRename(request: putDatasetRenameRequest): Observable<void> {
+    return this.http.put<void>(`${this.baseUrl}/v1/rename/`, request);
+  }
+
+  deleteDataset(params: HttpParams): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/v1/delete/`, { params });
   }
 }

@@ -6,8 +6,10 @@ class Dataset(models.Model):
     dataset_id = models.AutoField(primary_key=True)
     dataset_name = models.CharField(max_length=100)
     table_name = models.CharField(max_length=100)
-    size = models.FloatField()
+    df_size = models.FloatField()
     created_at = models.DateTimeField(auto_now_add=True)
+    start_date = models.DateField()
+    end_date = models.DateField()
 
     class Meta:
         app_label = "apps"

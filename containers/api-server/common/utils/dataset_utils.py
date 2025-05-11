@@ -2,16 +2,14 @@ import re
 
 import pandas as pd
 from common.utils.db_utils import save_dataframe_to_postgres
-from django.core.files.uploadedfile import UploadedFile
 from sqlalchemy.types import ARRAY, DateTime, Text
 
 
 class DatasetUtils:
 
     @staticmethod
-    def dataset_create(file: UploadedFile, table_name: str) -> None:
+    def dataset_create(df: pd.DataFrame, table_name: str) -> None:
 
-        df = pd.read_json(file)
         df["channel_name"] = df["subtitles"].apply(
             lambda x: x[0].get("name") if isinstance(x, list) else None
         )
@@ -27,6 +25,8 @@ class DatasetUtils:
         df["details"] = df["details"].apply(
             lambda x: x[0].get("name") if isinstance(x, list) else None
         )
+
+        df["time"] = pd.to_datetime(df["time"], errors="coerce")
 
         df.columns = [_camel_to_snake(col) for col in df.columns]
         df = df.drop(columns=["subtitles"])

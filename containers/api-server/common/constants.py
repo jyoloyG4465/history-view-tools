@@ -5,3 +5,7 @@ class Constants:
     KEY_DATASET_ID = "datasetId"
 
     KEY_DATASET_NAME = "datasetName"
+
+    KEY_START_DATE = "startDate"
+
+    KEY_END_DATE = "endDate"

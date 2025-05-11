@@ -18,14 +18,14 @@ def create(request: Request):
         raise TypeError("無効なファイル型です")
 
     try:
-        services.dataset_create(file, dataset_name)
+        response = services.dataset_create(file, dataset_name)
     except:
         return Response(
             {"error": "ファイル取り込みに失敗しました"},
             status=status.HTTP_400_BAD_REQUEST,
         )
 
-    return Response(status=status.HTTP_201_CREATED)
+    return Response(response, status=status.HTTP_201_CREATED)
 
 
 @api_view(["GET"])
@@ -38,22 +38,12 @@ def get_list(_: Request):
 def rename(request: Request):
     dataset_id = request.data[Constants.KEY_DATASET_ID]
     dataset_name = request.data[Constants.KEY_DATASET_NAME]
-    dataset = Dataset.objects.filter(dataset_id=dataset_id).first()
-    if dataset is None:
-        return Response({"message": "PUT no datasets"}, status=status.HTTP_200_OK)
-
-    dataset.dataset_name = dataset_name
-    dataset.save()
-    return Response({"message": "PUT request received"}, status=status.HTTP_200_OK)
+    services.rename_dataset(dataset_id, dataset_name)
+    return Response({}, status=status.HTTP_200_OK)
 
 
 @api_view(["DELETE"])
 def delete(request: Request):
     dataset_id = request.query_params.get(Constants.KEY_DATASET_ID)
-    dataset = Dataset.objects.filter(dataset_id=dataset_id).first()
-    if dataset is None:
-        return Response({"message": "DELETE no datasets"}, status=status.HTTP_200_OK)
-    dataset.delete()
-    return Response(
-        {"message": "DELETE request received"}, status=status.HTTP_204_NO_CONTENT
-    )
+    services.delete_dataset(dataset_id)
+    return Response({}, status=status.HTTP_204_NO_CONTENT)

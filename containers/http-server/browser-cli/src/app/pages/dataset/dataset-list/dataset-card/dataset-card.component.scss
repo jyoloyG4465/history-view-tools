@@ -1,0 +1,32 @@
+.example-header-image {
+  background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
+  background-size: cover;
+}
+
+.horizontal-card .card-horizontal-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 2px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* より強めの影 */
+}
+
+.card-left {
+  flex: 1;
+}
+
+.card-title {
+  width: 100%;
+  max-width: 50%;
+  font-size: 24px;
+}
+
+.card-actions-right {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  margin-left: 16px;
+}

@@ -1,0 +1,21 @@
+<mat-card class="example-card horizontal-card">
+  <div class="card-horizontal-container">
+    <div class="card-left">
+      <mat-card-content class="card-title">
+        <app-noborder-text-box
+          [text]="dataset.datasetName"
+          (confirmedEvent)="onValueConfirmed($event)"
+        ></app-noborder-text-box>
+      </mat-card-content>
+      <mat-card-content
+        >{{ dataset.startDate }} ~ {{ dataset.endDate }}
+      </mat-card-content>
+    </div>
+
+    <mat-card-actions class="card-actions-right">
+      <button mat-button (click)="onDelete()">
+        {{ "delete" | translate }}
+      </button>
+    </mat-card-actions>
+  </div>
+</mat-card>

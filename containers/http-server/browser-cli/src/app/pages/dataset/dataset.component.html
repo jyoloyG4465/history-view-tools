@@ -7,7 +7,11 @@
   </div>
   <div class="title">{{ "datasetList" | translate }}</div>
   <div class="card-list">
-    <app-dataset-list></app-dataset-list>
+    <app-dataset-list
+      [datasetList]="datasetList"
+      (updateEvent)="onUpdate($event)"
+      (deleteEvent)="onDelete($event)"
+    ></app-dataset-list>
   </div>
 </div>
 
