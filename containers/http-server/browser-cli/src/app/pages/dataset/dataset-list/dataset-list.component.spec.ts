@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InputTextComponent } from './input-text.component';
+import { DatasetListComponent } from './dataset-list.component';
 
-describe('InputTextComponent', () => {
-  let component: InputTextComponent;
-  let fixture: ComponentFixture<InputTextComponent>;
+describe('DatasetListComponent', () => {
+  let component: DatasetListComponent;
+  let fixture: ComponentFixture<DatasetListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [InputTextComponent]
+      imports: [DatasetListComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(InputTextComponent);
+    fixture = TestBed.createComponent(DatasetListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

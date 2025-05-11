@@ -2,12 +2,12 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-input-text',
+  selector: 'app-input-label-text-box',
   imports: [FormsModule],
-  templateUrl: './input-text.component.html',
-  styleUrl: './input-text.component.scss',
+  templateUrl: './input-label-text-box.component.html',
+  styleUrl: './input-label-text-box.component.scss',
 })
-export class InputTextComponent {
+export class InputLabelTextBoxComponent {
   inputValue: string = '';
 
   @Output() confirmedEvent = new EventEmitter<string>();

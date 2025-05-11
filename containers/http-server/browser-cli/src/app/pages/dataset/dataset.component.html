@@ -6,6 +6,9 @@
     ></app-dataset-import>
   </div>
   <div class="title">{{ "datasetList" | translate }}</div>
+  <div class="card-list">
+    <app-dataset-list></app-dataset-list>
+  </div>
 </div>
 
 <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
