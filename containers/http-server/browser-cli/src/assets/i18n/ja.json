@@ -20,5 +20,6 @@
   "import data": "データを取り込む",
   "analyze": "分析する",
   "about tools": "このツールについて",
-  "delete": "削除"
+  "delete": "削除",
+  "not exist dataset": "データセットが存在しません。"
 }
