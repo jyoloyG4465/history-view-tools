@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { ButtonPrimaryComponent } from '@app/shared/button-primary/button-primary.component';
-import { InputLabelTextBoxComponent } from '@app/shared/input-label-text-box/input-label-text-box.component';
+import { LabelTextBoxComponent } from '@app/shared/input/label-text-box/label-text-box.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-dataset-import',
   imports: [
     ButtonPrimaryComponent,
-    InputLabelTextBoxComponent,
+    LabelTextBoxComponent,
     CommonModule,
     TranslateModule,
   ],
