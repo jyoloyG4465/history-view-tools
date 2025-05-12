@@ -1,0 +1,17 @@
+.layout-row {
+  display: flex;
+  width: 100%;
+  gap: 20px; // 任意で余白をつけたい場合
+
+  .import-box {
+    flex: 4;
+    background-color: #f5f5f5; // デモ用
+    padding: 16px;
+  }
+
+  .card-list {
+    flex: 6;
+    background-color: #e0e0e0; // デモ用
+    padding: 16px;
+  }
+}
