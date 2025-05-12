@@ -22,5 +22,6 @@
   "about tools": "このツールについて",
   "delete": "削除",
   "not exist dataset": "データセットが存在しません。",
-  "analysis display": "分析画面"
+  "analysis display": "分析画面",
+  "dataset": "データセット"
 }

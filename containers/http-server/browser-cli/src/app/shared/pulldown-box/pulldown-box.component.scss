@@ -1,0 +1,9 @@
+.full-width {
+  width: 100%;
+  background-color: #e0e0e0; /* 明るめのグレー */
+  border-radius: 4px;
+}
+::ng-deep .transparent-panel {
+  background-color: white !important;
+  opacity: 1 !important;
+}

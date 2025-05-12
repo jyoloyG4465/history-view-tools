@@ -2,7 +2,12 @@
   <div class="title">{{ "analysis display" | translate }}</div>
   <div class="layout-row">
     <div class="import-box">
-      {{ "analysis display" | translate }}
+      <app-pulldown-box
+        [label]="'dataset' | translate"
+        [options]="datasetOptions"
+        [(selectedValue)]="selectedDatasetId"
+      >
+      </app-pulldown-box>
     </div>
     <div class="card-list">
       {{ "analysis display" | translate }}
@@ -10,4 +15,4 @@
   </div>
 </div>
 
-<app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+<app-loading-spinner *ngIf="false"></app-loading-spinner>
