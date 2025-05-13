@@ -17,7 +17,7 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class AnalysisEditComponent {
   datasetOptions = [
-    { label: 'Dataset A', value: 1 },
+    { label: 'なべぞー', value: 1 },
     { label: 'Dataset B', value: 2 },
   ];
 

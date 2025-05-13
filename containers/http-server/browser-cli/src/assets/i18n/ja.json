@@ -23,5 +23,8 @@
   "delete": "削除",
   "not exist dataset": "データセットが存在しません。",
   "analysis display": "分析画面",
-  "dataset": "データセット"
+  "dataset": "データセット",
+  "select dataset": "選択データセット",
+  "analysis target": "分析する対象",
+  "uploader fliter": "投稿者で絞り込む"
 }
