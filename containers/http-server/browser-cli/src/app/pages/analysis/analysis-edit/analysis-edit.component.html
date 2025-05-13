@@ -1,0 +1,33 @@
+<div class="edit-list">
+  <app-pulldown-box
+    [label]="'dataset' | translate"
+    [options]="datasetOptions"
+    [(selectedValue)]="selectedDatasetId"
+  >
+  </app-pulldown-box>
+
+  <app-pulldown-box
+    [label]="'dataset' | translate"
+    [options]="datasetOptions"
+    [(selectedValue)]="selectedDatasetId"
+  >
+  </app-pulldown-box>
+
+  <app-pulldown-box
+    [label]="'dataset' | translate"
+    [options]="datasetOptions"
+    [(selectedValue)]="selectedDatasetId"
+  >
+  </app-pulldown-box>
+</div>
+
+<div class="button">
+  <app-button-primary
+    [label]="'analyze' | translate"
+    [width]="300"
+    [height]="80"
+    [fontSize]="32"
+    (clicked)="onAnalysisClick()"
+  >
+  </app-button-primary>
+</div>

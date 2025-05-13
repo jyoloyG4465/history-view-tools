@@ -13,6 +13,10 @@ export class ButtonPrimaryComponent {
 
   @Input() width: number = 200;
 
+  @Input() height: number = 50;
+
+  @Input() fontSize: number = 16;
+
   @Input() disabled = false;
 
   @Output() clicked = new EventEmitter<void>();

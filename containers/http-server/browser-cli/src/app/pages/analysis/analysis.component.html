@@ -1,13 +1,8 @@
 <div class="content">
   <div class="title">{{ "analysis display" | translate }}</div>
   <div class="layout-row">
-    <div class="import-box">
-      <app-pulldown-box
-        [label]="'dataset' | translate"
-        [options]="datasetOptions"
-        [(selectedValue)]="selectedDatasetId"
-      >
-      </app-pulldown-box>
+    <div class="edit-list">
+      <app-analysis-edit></app-analysis-edit>
     </div>
     <div class="card-list">
       {{ "analysis display" | translate }}

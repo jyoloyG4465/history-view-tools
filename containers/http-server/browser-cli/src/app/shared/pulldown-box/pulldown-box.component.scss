@@ -1,9 +1,13 @@
-.full-width {
+.gray-select {
+  background-color: #e0e0e0;
   width: 100%;
-  background-color: #e0e0e0; /* 明るめのグレー */
-  border-radius: 4px;
 }
 ::ng-deep .transparent-panel {
   background-color: white !important;
   opacity: 1 !important;
+}
+
+::ng-deep
+  .mat-mdc-form-field-subscript-wrapper.mat-mdc-form-field-bottom-align {
+  background-color: white;
 }
