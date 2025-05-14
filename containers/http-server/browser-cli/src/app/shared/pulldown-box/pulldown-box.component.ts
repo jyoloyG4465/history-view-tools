@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatOptionModule } from '@angular/material/core';
-import { MatError, MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 
@@ -13,7 +13,6 @@ import { MatSelectModule } from '@angular/material/select';
     MatInputModule,
     MatOptionModule,
     CommonModule,
-    MatError,
   ],
   templateUrl: './pulldown-box.component.html',
   styleUrl: './pulldown-box.component.scss',

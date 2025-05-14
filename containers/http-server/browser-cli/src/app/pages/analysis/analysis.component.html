@@ -2,10 +2,18 @@
   <div class="title">{{ "analysis display" | translate }}</div>
   <div class="layout-row">
     <div class="edit-list">
-      <app-analysis-edit
-        [datasetList]="datasetList"
-        (selectedDatasetEvent)="onSample($event)"
-      ></app-analysis-edit>
+      <ng-container *ngIf="datasetList.length > 0">
+        <app-analysis-edit
+          [datasetList]="datasetList"
+          (selectedDatasetEvent)="onSample($event)"
+        ></app-analysis-edit>
+      </ng-container>
+
+      <ng-container *ngIf="!isLoading && datasetList.length == 0">
+        <div class="no-dataset-message">
+          {{ "データセットが登録されていません" | translate }}
+        </div>
+      </ng-container>
     </div>
     <div class="analysis-graph">
       <app-analysis-graph></app-analysis-graph>
