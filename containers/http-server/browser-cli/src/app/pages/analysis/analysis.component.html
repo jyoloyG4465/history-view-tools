@@ -2,7 +2,10 @@
   <div class="title">{{ "analysis display" | translate }}</div>
   <div class="layout-row">
     <div class="edit-list">
-      <app-analysis-edit></app-analysis-edit>
+      <app-analysis-edit
+        [datasetList]="datasetList"
+        (selectedDatasetEvent)="onSample($event)"
+      ></app-analysis-edit>
     </div>
     <div class="analysis-graph">
       <app-analysis-graph></app-analysis-graph>
@@ -10,4 +13,4 @@
   </div>
 </div>
 
-<app-loading-spinner *ngIf="false"></app-loading-spinner>
+<app-loading-spinner *ngIf="isLoading"></app-loading-spinner>

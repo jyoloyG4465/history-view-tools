@@ -2,6 +2,7 @@
   display: flex;
   width: 100%;
   gap: 20px; // 任意で余白をつけたい場合
+  height: calc(100vh - 240px);
 
   .edit-list {
     flex: 4;

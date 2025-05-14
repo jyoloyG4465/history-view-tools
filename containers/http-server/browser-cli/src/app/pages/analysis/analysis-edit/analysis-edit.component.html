@@ -2,32 +2,34 @@
   <app-pulldown-box
     [label]="'select dataset' | translate"
     [options]="datasetOptions"
-    [(selectedValue)]="selectedDatasetId"
+    [selectedValue]="selectedDatasetId"
+    (selectedValueChangeEvent)="onSample($event)"
   >
   </app-pulldown-box>
+  <ng-container *ngIf="selectedDatasetId !== null">
+    <app-pulldown-box
+      [label]="'analysis target' | translate"
+      [options]="analysisOptions"
+      [selectedValue]="1"
+    >
+    </app-pulldown-box>
 
-  <app-pulldown-box
-    [label]="'analysis target' | translate"
-    [options]="datasetOptions"
-    [(selectedValue)]="selectedDatasetId"
-  >
-  </app-pulldown-box>
+    <app-pulldown-box
+      [label]="'uploader filter' | translate"
+      [options]="datasetOptions"
+      [selectedValue]="selectedDatasetId"
+    >
+    </app-pulldown-box>
 
-  <app-pulldown-box
-    [label]="'uploader fliter' | translate"
-    [options]="datasetOptions"
-    [(selectedValue)]="selectedDatasetId"
-  >
-  </app-pulldown-box>
-</div>
-
-<div class="button">
-  <app-button-primary
-    [label]="'analyze' | translate"
-    [width]="300"
-    [height]="80"
-    [fontSize]="32"
-    (clicked)="onAnalysisClick()"
-  >
-  </app-button-primary>
+    <div class="button">
+      <app-button-primary
+        [label]="'analyze' | translate"
+        [width]="300"
+        [height]="80"
+        [fontSize]="32"
+        (clicked)="onAnalysisClick()"
+      >
+      </app-button-primary>
+    </div>
+  </ng-container>
 </div>
