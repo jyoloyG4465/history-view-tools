@@ -1,0 +1,28 @@
+.image-button-row {
+  display: flex;
+  max-width: 70%;
+  justify-content: space-between; /* or flex-start */
+  margin: 0 auto;
+}
+
+.image-button-row button {
+  border: none;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.image-button-row img {
+  width: 100px;
+  height: 100px; /* 高さも固定 */
+  object-fit: cover; /* 縦横比を保ちつつ枠にフィット */
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  height: auto;
+  border-radius: 8px;
+  transition: transform 0.2s ease;
+}
+
+.image-button-row img:hover {
+  transform: scale(1.05);
+}
