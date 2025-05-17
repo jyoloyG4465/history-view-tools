@@ -1,14 +1,12 @@
 import uuid
-from typing import Any
 
 import pandas as pd
-from django.core.files.uploadedfile import UploadedFile
-from django.db import transaction
-
 from common.constants import Constants
 from common.models import Dataset
 from common.utils.dataset_utils import DatasetUtils
 from common.utils.db_utils import DbUtils
+from django.core.files.uploadedfile import UploadedFile
+from django.db import transaction
 
 
 def dataset_create(file: UploadedFile, dataset_name: str) -> dict[str, int]:
@@ -55,15 +53,14 @@ def get_list():
     return response
 
 
-def rename_dataset(dataset_id: int, dataset_name: str) -> dict[str, Any]:
+def rename_dataset(dataset_id: int, dataset_name: str) -> None:
     with transaction.atomic():
         dataset = Dataset.objects.select_for_update().get(dataset_id=dataset_id)
         dataset.dataset_name = dataset_name
         dataset.save()
-    return
 
 
-def delete_dataset(dataset_id: int) -> dict[str, Any]:
+def delete_dataset(dataset_id: int) -> None:
     dataset = Dataset.objects.filter(dataset_id=dataset_id).first()
 
     if dataset is None:
@@ -72,4 +69,3 @@ def delete_dataset(dataset_id: int) -> dict[str, Any]:
     table_name = dataset.table_name
     DbUtils.delete_app_data_table(table_name)
     dataset.delete()
-    return

@@ -40,7 +40,7 @@ class DbUtils:
         return
 
     @staticmethod
-    def get_dataset_channel_list(table_name: str) -> list[Any]:
+    def get_dataset_channel_list(table_name: str) -> list[str]:
         engine = _get_engine()
 
         sql = f"""
@@ -54,14 +54,14 @@ class DbUtils:
 
         with engine.connect() as connection:
             result = connection.execute(text(sql))
-            channel_names = [row[0] for row in result.fetchall()]
+            channel_names: list[str] = [row[0] for row in result.fetchall()]
 
         return channel_names
 
     @staticmethod
     def get_monthly_view_counts(
         table_name: str, channel_name: str | None
-    ) -> list[dict[Any, Any]]:
+    ) -> list[dict[str, str | int]]:
         engine = _get_engine()
 
         where_clause = (
@@ -92,6 +92,8 @@ class DbUtils:
 
         with engine.connect() as connection:
             result = connection.execute(text(sql))
-            data = [{"yearMonth": row[0], "total": row[1]} for row in result.fetchall()]
+            data: list[dict[str, str | int]] = [
+                {"yearMonth": row[0], "total": row[1]} for row in result.fetchall()
+            ]
 
         return data

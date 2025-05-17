@@ -4,10 +4,7 @@ from common.utils.db_utils import DbUtils
 
 def get_channel_list(dataset_id: int) -> dict[str, list]:
 
-    dataset = Dataset.objects.filter(dataset_id=dataset_id).first()
-    if dataset is None:
-
-        return {"message": "GET no datasets"}
+    dataset = Dataset.objects.get(dataset_id=dataset_id)
 
     table_name = dataset.table_name
 
@@ -17,10 +14,7 @@ def get_channel_list(dataset_id: int) -> dict[str, list]:
 
 
 def get_data(dataset_id: int, channel_name: str | None) -> dict[str, list]:
-    dataset = Dataset.objects.filter(dataset_id=dataset_id).first()
-    if dataset is None:
-
-        return {"message": "GET no datasets"}
+    dataset = Dataset.objects.get(dataset_id=dataset_id)
 
     table_name = dataset.table_name
 
