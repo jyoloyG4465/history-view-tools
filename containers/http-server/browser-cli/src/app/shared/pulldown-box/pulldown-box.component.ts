@@ -21,9 +21,12 @@ export class PulldownBoxComponent {
   @Input() label: string = '';
   @Input() options: { label: string; value: number }[] = [];
   @Input() selectedValue: any;
-  @Output() selectedValueChangeEvent = new EventEmitter<any>();
+  @Output() selectedValueChangeEvent = new EventEmitter<{
+    label: string;
+    value: number;
+  }>();
 
   onChange(event: any) {
-    this.selectedValueChangeEvent.emit(event.value);
+    this.selectedValueChangeEvent.emit(event);
   }
 }

@@ -32,6 +32,8 @@ export class AnalysisComponent {
 
   graphData: postGetDataResponse | undefined;
 
+  channelName: string = '';
+
   isLoading = false;
 
   selectedDatasetId!: number;
@@ -67,13 +69,12 @@ export class AnalysisComponent {
     this.setLoading(false);
   }
 
-  async onClickAnalysis() {
-    const channelName = 'もこうの実況';
+  async onClickAnalysis(event: string) {
+    this.channelName = event;
     this.setLoading(true);
-    const sample = await lastValueFrom(
-      this.analysisService.postGetData(this.selectedDatasetId)
+    this.graphData = await lastValueFrom(
+      this.analysisService.postGetData(this.selectedDatasetId, event)
     );
-    console.log(sample);
     this.setLoading(false);
   }
 }

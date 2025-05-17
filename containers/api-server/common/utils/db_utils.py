@@ -66,11 +66,23 @@ def get_monthly_view_counts(
     )
 
     sql = f"""
-    SELECT TO_CHAR(time, 'YYYY-MM') AS year_month, COUNT(*) AS total
-    FROM app_data."{table_name}"
-    {where_clause}
-    GROUP BY year_month
-    ORDER BY year_month;
+    WITH months AS (
+        SELECT TO_CHAR(d, 'YYYY-MM') AS year_month
+        FROM generate_series(
+            DATE_TRUNC('month', NOW() - INTERVAL '12 months'),
+            DATE_TRUNC('month', NOW()),
+            INTERVAL '1 month'
+        ) AS d
+    )
+    SELECT m.year_month, COALESCE(t.total, 0) AS total
+    FROM months m
+    LEFT JOIN (
+        SELECT TO_CHAR(time, 'YYYY-MM') AS year_month, COUNT(*) AS total
+        FROM app_data."{table_name}"
+        {where_clause}
+        GROUP BY year_month
+    ) t ON m.year_month = t.year_month
+    ORDER BY m.year_month;
     """
 
     with engine.connect() as connection:

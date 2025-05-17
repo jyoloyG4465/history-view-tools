@@ -31,13 +31,15 @@ export class AnalysisEditComponent implements OnChanges {
 
   @Output() selectedDatasetEvent = new EventEmitter<number>();
 
-  @Output() clickAnalysis = new EventEmitter<void>();
+  @Output() clickAnalysis = new EventEmitter<string>();
 
   datasetOptions: { label: string; value: number }[] = [];
 
   channelOptions: { label: string; value: number }[] = [];
 
   selectedDatasetId: number | null = null;
+
+  selectedChannelId: number = 0;
 
   analysisOptions: { label: string; value: number }[] = [
     { label: '月ごとの再生回数', value: 1 },
@@ -58,11 +60,18 @@ export class AnalysisEditComponent implements OnChanges {
   }
 
   onAnalysisClick() {
-    this.clickAnalysis.emit();
+    const channelName = this.channelOptions?.find(
+      (d) => d.value === this.selectedChannelId
+    )?.label;
+    this.clickAnalysis.emit(channelName);
   }
 
-  onSelectDataset(event: number) {
-    this.selectedDatasetEvent.emit(event);
-    this.selectedDatasetId = event;
+  onSelectDataset(event: { label: string; value: number }) {
+    this.selectedDatasetEvent.emit(event.value);
+    this.selectedDatasetId = event.value;
+  }
+
+  onSelectChannel(event: { label: string; value: number }) {
+    this.selectedChannelId = event.value;
   }
 }

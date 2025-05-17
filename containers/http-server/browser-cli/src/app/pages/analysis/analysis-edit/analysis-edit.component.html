@@ -17,7 +17,8 @@
     <app-pulldown-box
       [label]="'uploader filter' | translate"
       [options]="channelOptions"
-      [selectedValue]="0"
+      [selectedValue]="selectedChannelId"
+      (selectedValueChangeEvent)="onSelectChannel($event)"
     >
     </app-pulldown-box>
 

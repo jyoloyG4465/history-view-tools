@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-analysis-graph-settings',
@@ -7,8 +7,9 @@ import { Component } from '@angular/core';
   styleUrl: './analysis-graph-settings.component.scss',
 })
 export class AnalysisGraphSettingsComponent {
-  onClickImage(index: number): void {
-    console.log(`Image ${index} clicked`);
-    // ここに任意の処理を追加
+  @Output() graphTypeChangeEvent = new EventEmitter<string>();
+
+  onClickImage(graphType: string): void {
+    this.graphTypeChangeEvent.emit(graphType);
   }
 }

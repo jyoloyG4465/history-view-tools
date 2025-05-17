@@ -1,8 +1,16 @@
 <div class="layout-column">
-  <div class="graph-view">
-    <app-analysis-graph-view [graphData]="graphData"></app-analysis-graph-view>
-  </div>
-  <div class="graph-settings">
-    <app-analysis-graph-settings></app-analysis-graph-settings>
-  </div>
+  <ng-container *ngIf="graphData">
+    <div class="graph-view">
+      <app-analysis-graph-view
+        [graphData]="graphData"
+        [graphType]="graphType"
+        [channelName]="channelName"
+      ></app-analysis-graph-view>
+    </div>
+    <div class="graph-settings">
+      <app-analysis-graph-settings
+        (graphTypeChangeEvent)="onGraphTypeChange($event)"
+      ></app-analysis-graph-settings>
+    </div>
+  </ng-container>
 </div>

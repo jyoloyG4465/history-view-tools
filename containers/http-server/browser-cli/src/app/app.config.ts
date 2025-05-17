@@ -9,6 +9,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -29,5 +30,10 @@ export const appConfig: ApplicationConfig = {
       })
     ),
     importProvidersFrom(MatProgressSpinnerModule),
+    importProvidersFrom(
+      NgxEchartsModule.forRoot({
+        echarts: () => import('echarts'), // 遅延ロードでバンドルサイズも最適
+      })
+    ),
   ],
 };

@@ -28,4 +28,4 @@ def get_data(dataset_id: int, channel_name: str | None) -> dict[str, list]:
 
     data = get_monthly_view_counts(table_name, channel_name)
 
-    return data
+    return {"data": data}
