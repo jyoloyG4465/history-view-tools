@@ -19,7 +19,6 @@ export class AnalysisService {
     datasetId: number,
     channelName?: string
   ): Observable<postGetDataResponse> {
-    console.log(channelName);
     const request = { datasetId, channelName };
     return this.analysisApiService.postDatasetCreate(request);
   }
