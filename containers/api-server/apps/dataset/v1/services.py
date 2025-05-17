@@ -2,12 +2,13 @@ import uuid
 from typing import Any
 
 import pandas as pd
+from django.core.files.uploadedfile import UploadedFile
+from django.db import transaction
+
 from common.constants import Constants
 from common.models import Dataset
 from common.utils.dataset_utils import DatasetUtils
-from common.utils.db_utils import delete_app_data_table
-from django.core.files.uploadedfile import UploadedFile
-from django.db import transaction
+from common.utils.db_utils import DbUtils
 
 
 def dataset_create(file: UploadedFile, dataset_name: str) -> dict[str, int]:
@@ -69,6 +70,6 @@ def delete_dataset(dataset_id: int) -> dict[str, Any]:
         return
 
     table_name = dataset.table_name
-    delete_app_data_table(table_name)
+    DbUtils.delete_app_data_table(table_name)
     dataset.delete()
     return

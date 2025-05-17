@@ -1,7 +1,7 @@
 import re
 
 import pandas as pd
-from common.utils.db_utils import save_dataframe_to_postgres
+from common.utils.db_utils import DbUtils
 from sqlalchemy.types import ARRAY, DateTime, Text
 
 
@@ -43,7 +43,7 @@ class DatasetUtils:
             "channel_url": Text(),
         }
 
-        save_dataframe_to_postgres(df, table_name, dtype)
+        DbUtils.save_dataframe_to_postgres(df, table_name, dtype)
 
         return
 

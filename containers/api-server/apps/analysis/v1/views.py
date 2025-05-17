@@ -1,9 +1,10 @@
-from apps.analysis.v1 import services
-from common.constants import Constants
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.request import Request
 from rest_framework.response import Response
+
+from apps.analysis.v1 import services
+from common.constants import Constants
 
 
 @api_view(["GET"])
