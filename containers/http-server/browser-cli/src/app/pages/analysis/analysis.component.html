@@ -5,7 +5,9 @@
       <ng-container *ngIf="datasetList.length > 0">
         <app-analysis-edit
           [datasetList]="datasetList"
-          (selectedDatasetEvent)="onSample($event)"
+          [channelList]="channelList"
+          (selectedDatasetEvent)="onSelectDataset($event)"
+          (clickAnalysis)="onClickAnalysis()"
         ></app-analysis-edit>
       </ng-container>
 
@@ -16,7 +18,7 @@
       </ng-container>
     </div>
     <div class="analysis-graph">
-      <app-analysis-graph></app-analysis-graph>
+      <app-analysis-graph [graphData]="graphData"></app-analysis-graph>
     </div>
   </div>
 </div>

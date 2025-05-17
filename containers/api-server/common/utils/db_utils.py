@@ -56,7 +56,9 @@ def get_dataset_channel_list(table_name: str) -> list[Any]:
     return channel_names
 
 
-def get_monthly_view_counts(table_name: str, channel_name: str | None) -> list[Any]:
+def get_monthly_view_counts(
+    table_name: str, channel_name: str | None
+) -> list[dict[Any, Any]]:
     engine = _get_engine()
 
     where_clause = (
@@ -73,6 +75,6 @@ def get_monthly_view_counts(table_name: str, channel_name: str | None) -> list[A
 
     with engine.connect() as connection:
         result = connection.execute(text(sql))
-        data = [(row[0], row[1]) for row in result.fetchall()]
+        data = [{"yearMonth": row[0], "total": row[1]} for row in result.fetchall()]
 
     return data

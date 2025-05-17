@@ -3,7 +3,7 @@
     [label]="'select dataset' | translate"
     [options]="datasetOptions"
     [selectedValue]="selectedDatasetId"
-    (selectedValueChangeEvent)="onSample($event)"
+    (selectedValueChangeEvent)="onSelectDataset($event)"
   >
   </app-pulldown-box>
   <ng-container *ngIf="selectedDatasetId !== null">
@@ -16,8 +16,8 @@
 
     <app-pulldown-box
       [label]="'uploader filter' | translate"
-      [options]="datasetOptions"
-      [selectedValue]="selectedDatasetId"
+      [options]="channelOptions"
+      [selectedValue]="0"
     >
     </app-pulldown-box>
 

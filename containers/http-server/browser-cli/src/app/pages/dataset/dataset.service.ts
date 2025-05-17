@@ -10,9 +10,6 @@ import { Observable, Subject, switchMap } from 'rxjs';
 export class DatasetService {
   constructor(private datasetApiService: DatasetApiService) {}
 
-  private datasetChangedSubject = new Subject<void>();
-  datasetChanged$ = this.datasetChangedSubject.asObservable();
-
   putDatasetRename(datasetId: number, datasetName: string): Observable<void> {
     const request = { datasetId, datasetName };
     return this.datasetApiService.putDatasetRename(request);
