@@ -54,3 +54,25 @@ def get_dataset_channel_list(table_name: str) -> list[Any]:
         channel_names = [row[0] for row in result.fetchall()]
 
     return channel_names
+
+
+def get_monthly_view_counts(table_name: str, channel_name: str | None) -> list[Any]:
+    engine = _get_engine()
+
+    where_clause = (
+        f"""WHERE channel_name = '{channel_name}'""" if channel_name is not None else ""
+    )
+
+    sql = f"""
+    SELECT TO_CHAR(time, 'YYYY-MM') AS year_month, COUNT(*) AS total
+    FROM app_data."{table_name}"
+    {where_clause}
+    GROUP BY year_month
+    ORDER BY year_month;
+    """
+
+    with engine.connect() as connection:
+        result = connection.execute(text(sql))
+        data = [(row[0], row[1]) for row in result.fetchall()]
+
+    return data

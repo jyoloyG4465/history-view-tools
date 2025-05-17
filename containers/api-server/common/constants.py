@@ -9,3 +9,5 @@ class Constants:
     KEY_START_DATE = "startDate"
 
     KEY_END_DATE = "endDate"
+
+    KEY_CHANNEL_NAME = "channelName"

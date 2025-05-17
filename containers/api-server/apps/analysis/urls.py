@@ -21,4 +21,5 @@ from .v1 import views
 
 urlpatterns = [
     path("v1/channel-list/", views.get_channel_list),
+    path("v1/get-data/", views.get_data),
 ]
