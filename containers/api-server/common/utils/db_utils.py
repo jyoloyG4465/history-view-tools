@@ -35,3 +35,22 @@ def delete_app_data_table(table_name: str) -> None:
         connection.commit()  # コミットを追加
 
     return
+
+
+def get_dataset_channel_list(table_name: str) -> list[Any]:
+    engine = _get_engine()
+
+    sql = f"""
+        SELECT channel_name
+        FROM app_data."{table_name}"
+        WHERE channel_name IS NOT NULL
+        GROUP BY channel_name
+        ORDER BY COUNT(*) DESC
+        LIMIT 100;
+    """
+
+    with engine.connect() as connection:
+        result = connection.execute(text(sql))
+        channel_names = [row[0] for row in result.fetchall()]
+
+    return channel_names
