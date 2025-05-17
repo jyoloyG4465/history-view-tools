@@ -61,7 +61,7 @@ class DbUtils:
     @staticmethod
     def get_monthly_view_counts(
         table_name: str, channel_name: str | None
-    ) -> list[dict[str, str | int]]:
+    ) -> list[dict[Any, Any]]:
         engine = _get_engine()
 
         where_clause = (
