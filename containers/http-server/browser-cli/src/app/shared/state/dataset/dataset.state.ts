@@ -1,6 +1,6 @@
 import { Dataset } from '@app/models/dataset.model';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
-import { DatasetApiService } from '../services/dataset.service';
+import { DatasetApiService } from '../../services/dataset.service';
 import { map, Observable, tap } from 'rxjs';
 import { Injectable } from '@angular/core';
 
