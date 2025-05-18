@@ -1,11 +1,13 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { LoadingState, StartLoading, StopLoading } from './loading.state';
 
 @Injectable({ providedIn: 'root' })
 export class LoadingStateFacade {
-  constructor(private store: Store) {}
+  private store = inject(Store);
+
+  constructor() {}
 
   get isLoading$(): Observable<boolean> {
     return this.store.select(LoadingState.isLoading);
