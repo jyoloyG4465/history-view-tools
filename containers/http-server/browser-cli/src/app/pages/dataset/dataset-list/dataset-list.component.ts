@@ -13,7 +13,7 @@ import { TranslateModule } from '@ngx-translate/core';
 export class DatasetListComponent {
   constructor() {}
 
-  @Input() datasetList: Dataset[] = [];
+  @Input() datasetList: Dataset[] | null = [];
 
   @Output() updateEvent = new EventEmitter<putDatasetRenameRequest>();
 

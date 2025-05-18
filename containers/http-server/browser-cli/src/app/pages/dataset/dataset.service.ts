@@ -1,7 +1,7 @@
 import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Dataset, postDatasetCreateResopnse } from '@app/models/dataset.model';
-import { DatasetApiService } from '@app/services/dataset.service';
+import { DatasetApiService } from '@app/shared/services/dataset.service';
 import { Observable, Subject, switchMap } from 'rxjs';
 
 @Injectable({

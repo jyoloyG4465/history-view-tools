@@ -5,8 +5,8 @@ import {
   postGetDataResponse,
 } from '@app/models/analysis.model';
 import { Dataset, postDatasetCreateResopnse } from '@app/models/dataset.model';
-import { AnalysisApiService } from '@app/services/analysis.service';
-import { DatasetApiService } from '@app/services/dataset.service';
+import { AnalysisApiService } from '@app/shared/services/analysis.service';
+import { DatasetApiService } from '@app/shared/services/dataset.service';
 import { Observable, Subject, switchMap } from 'rxjs';
 
 @Injectable({

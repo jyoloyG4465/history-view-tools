@@ -10,6 +10,10 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { APP_STATES } from './app.states';
+import { NgxsModule } from '@ngxs/store';
+import { environment } from '../environments/environment';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -34,6 +38,13 @@ export const appConfig: ApplicationConfig = {
       NgxEchartsModule.forRoot({
         echarts: () => import('echarts'), // 遅延ロードでバンドルサイズも最適
       })
+    ),
+    importProvidersFrom(NgxsModule.forRoot(APP_STATES)),
+    importProvidersFrom(
+      NgxsModule.forRoot(APP_STATES),
+      ...(!environment.production
+        ? [NgxsReduxDevtoolsPluginModule.forRoot()]
+        : [])
     ),
   ],
 };

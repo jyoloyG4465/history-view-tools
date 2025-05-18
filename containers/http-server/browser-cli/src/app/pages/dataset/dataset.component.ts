@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DatasetImportComponent } from './dataset-import/dataset-import.component';
-import { lastValueFrom, Subscription } from 'rxjs';
+import { lastValueFrom, Observable } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CommonModule } from '@angular/common';
@@ -8,6 +8,7 @@ import { LoadingSpinnerComponent } from '@app/shared/loading-spinner/loading-spi
 import { DatasetListComponent } from './dataset-list/dataset-list.component';
 import { Dataset, putDatasetRenameRequest } from '@app/models/dataset.model';
 import { DatasetService } from './dataset.service';
+import { DatasetStateFacade } from '@app/shared/state/dataset.state.facade';
 
 @Component({
   selector: 'app-dataset',
@@ -23,34 +24,33 @@ import { DatasetService } from './dataset.service';
   styleUrl: './dataset.component.scss',
 })
 export class DatasetComponent implements OnInit {
-  datasetList: Dataset[] = [];
+  datasetList$: Observable<Dataset[]>;
 
   isLoading = false;
-  constructor(private datasetService: DatasetService) {}
+  constructor(
+    private datasetService: DatasetService,
+    private datasetStateFacade: DatasetStateFacade
+  ) {
+    this.datasetList$ = this.datasetStateFacade.getDatasets$;
+  }
 
   async ngOnInit() {
-    await this.fetchDatasetList();
+    this.setLoading(true);
+    this.datasetStateFacade.loadDatasets();
+    this.setLoading(false);
   }
 
   async onUploadFile(formData: FormData): Promise<void> {
     try {
       this.setLoading(true);
       await lastValueFrom(this.datasetService.createDataset(formData));
-      await this.fetchDatasetList();
+      this.datasetStateFacade.loadDatasets();
       alert('ファイル取り込みに成功しました');
     } catch (err) {
       alert('ファイル取り込みに失敗しました');
     } finally {
       this.setLoading(false);
     }
-  }
-
-  async fetchDatasetList(): Promise<void> {
-    this.setLoading(true);
-    this.datasetList = await lastValueFrom(
-      this.datasetService.getDatasetList()
-    );
-    this.setLoading(false);
   }
 
   // ローディング状態の管理
@@ -62,11 +62,11 @@ export class DatasetComponent implements OnInit {
     await lastValueFrom(
       this.datasetService.putDatasetRename(event.datasetId, event.datasetName)
     );
-    await this.fetchDatasetList();
+    this.datasetStateFacade.loadDatasets();
   }
 
   async onDelete(datasetId: number): Promise<void> {
     await lastValueFrom(this.datasetService.deleteDataset(datasetId));
-    await this.fetchDatasetList();
+    this.datasetStateFacade.loadDatasets();
   }
 }
