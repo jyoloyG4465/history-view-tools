@@ -5,13 +5,13 @@ import { AnalysisEditComponent } from './analysis-edit/analysis-edit.component';
 import { AnalysisGraphComponent } from './analysis-graph/analysis-graph.component';
 import { Dataset } from '@app/models/dataset.model';
 import { lastValueFrom } from 'rxjs';
-import { DatasetService } from '../dataset/dataset.service';
 import { AnalysisService } from './analysis.service';
 import {
   getChannelListResponse,
   postGetDataResponse,
 } from '@app/models/analysis.model';
 import { LoadingStateFacade } from '@app/shared/state/loading/loading.state.facade';
+import { DatasetStateFacade } from '@app/shared/state/dataset/dataset.state.facade';
 
 @Component({
   selector: 'app-analysis',
@@ -35,22 +35,14 @@ export class AnalysisComponent {
 
   selectedDatasetId!: number;
 
-  private datasetService = inject(DatasetService);
   private analysisService = inject(AnalysisService);
   private loadingStateFacade = inject(LoadingStateFacade);
+  private datasetStateFacade = inject(DatasetStateFacade);
 
   constructor() {}
 
-  async ngOnInit() {
-    await this.fetchDatasetList();
-  }
-
-  async fetchDatasetList(): Promise<void> {
-    this.loadingStateFacade.startLoading('loadDataset');
-    this.datasetList = await lastValueFrom(
-      this.datasetService.getDatasetList()
-    );
-    this.loadingStateFacade.stopLoading('loadDataset');
+  ngOnInit() {
+    this.datasetStateFacade.fetchDatasetList();
   }
 
   async onSelectDataset(event: number) {

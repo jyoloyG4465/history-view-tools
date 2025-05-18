@@ -32,16 +32,14 @@ export class DatasetComponent implements OnInit {
   constructor() {}
 
   async ngOnInit() {
-    this.loadingStateFacade.startLoading('loadDataset');
-    this.datasetStateFacade.loadDatasets();
-    this.loadingStateFacade.stopLoading('loadDataset');
+    this.datasetStateFacade.fetchDatasetList();
   }
 
   async onUploadFile(formData: FormData): Promise<void> {
     try {
       this.loadingStateFacade.startLoading('createDataset');
       await lastValueFrom(this.datasetService.createDataset(formData));
-      this.datasetStateFacade.loadDatasets();
+      this.datasetStateFacade.fetchDatasetList();
       alert('ファイル取り込みに成功しました');
     } catch (err) {
       alert('ファイル取り込みに失敗しました');
@@ -54,11 +52,11 @@ export class DatasetComponent implements OnInit {
     await lastValueFrom(
       this.datasetService.putDatasetRename(event.datasetId, event.datasetName)
     );
-    this.datasetStateFacade.loadDatasets();
+    this.datasetStateFacade.fetchDatasetList();
   }
 
   async onDelete(datasetId: number): Promise<void> {
     await lastValueFrom(this.datasetService.deleteDataset(datasetId));
-    this.datasetStateFacade.loadDatasets();
+    this.datasetStateFacade.fetchDatasetList();
   }
 }

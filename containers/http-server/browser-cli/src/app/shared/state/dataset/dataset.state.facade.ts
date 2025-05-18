@@ -14,7 +14,7 @@ export class DatasetStateFacade {
     return this.store.select(DatasetState.getDatasets);
   }
 
-  loadDatasets(): Observable<void> {
+  fetchDatasetList(): Observable<void> {
     return this.store.dispatch(new SetDatasets());
   }
 }
