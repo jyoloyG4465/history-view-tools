@@ -1,5 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import {
   getChannelListResponse,
   postGetDataRequest,
@@ -19,7 +19,9 @@ import { Observable } from 'rxjs';
 export class AnalysisApiService {
   private baseUrl = 'http://localhost:8000/analysis';
 
-  constructor(private http: HttpClient) {}
+  private http = inject(HttpClient);
+
+  constructor() {}
 
   getChannelList(params: HttpParams): Observable<getChannelListResponse> {
     return this.http.get<getChannelListResponse>(

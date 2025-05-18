@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { DatasetImportComponent } from './dataset-import/dataset-import.component';
 import { lastValueFrom, Observable } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CommonModule } from '@angular/common';
-import { LoadingSpinnerComponent } from '@app/shared/loading-spinner/loading-spinner.component';
 import { DatasetListComponent } from './dataset-list/dataset-list.component';
 import { Dataset, putDatasetRenameRequest } from '@app/models/dataset.model';
 import { DatasetService } from './dataset.service';
-import { DatasetStateFacade } from '@app/shared/state/dataset.state.facade';
+import { DatasetStateFacade } from '@app/shared/state/dataset/dataset.state.facade';
+import { LoadingStateFacade } from '@app/shared/state/loading/loading.state.facade';
 
 @Component({
   selector: 'app-dataset',
@@ -17,45 +17,37 @@ import { DatasetStateFacade } from '@app/shared/state/dataset.state.facade';
     TranslateModule,
     MatProgressSpinnerModule,
     CommonModule,
-    LoadingSpinnerComponent,
     DatasetListComponent,
   ],
   templateUrl: './dataset.component.html',
   styleUrl: './dataset.component.scss',
 })
 export class DatasetComponent implements OnInit {
-  datasetList$: Observable<Dataset[]>;
+  private datasetService = inject(DatasetService);
+  private datasetStateFacade = inject(DatasetStateFacade);
+  private loadingStateFacade = inject(LoadingStateFacade);
 
-  isLoading = false;
-  constructor(
-    private datasetService: DatasetService,
-    private datasetStateFacade: DatasetStateFacade
-  ) {
-    this.datasetList$ = this.datasetStateFacade.getDatasets$;
-  }
+  datasetList$: Observable<Dataset[]> = this.datasetStateFacade.getDatasets$;
+
+  constructor() {}
 
   async ngOnInit() {
-    this.setLoading(true);
+    this.loadingStateFacade.startLoading('loadDataset');
     this.datasetStateFacade.loadDatasets();
-    this.setLoading(false);
+    this.loadingStateFacade.stopLoading('loadDataset');
   }
 
   async onUploadFile(formData: FormData): Promise<void> {
     try {
-      this.setLoading(true);
+      this.loadingStateFacade.startLoading('createDataset');
       await lastValueFrom(this.datasetService.createDataset(formData));
       this.datasetStateFacade.loadDatasets();
       alert('ファイル取り込みに成功しました');
     } catch (err) {
       alert('ファイル取り込みに失敗しました');
     } finally {
-      this.setLoading(false);
+      this.loadingStateFacade.stopLoading('createDataset');
     }
-  }
-
-  // ローディング状態の管理
-  private setLoading(state: boolean): void {
-    this.isLoading = state;
   }
 
   async onUpdate(event: putDatasetRenameRequest): Promise<void> {

@@ -2,7 +2,7 @@ import { Dataset } from '@app/models/dataset.model';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { DatasetApiService } from '../../services/dataset.service';
 import { map, Observable, tap } from 'rxjs';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 
 // Stateの状態の型
 export interface DatasetStateModel {
@@ -22,7 +22,8 @@ export class SetDatasets {
   },
 })
 export class DatasetState {
-  constructor(private datasetApiService: DatasetApiService) {}
+  private datasetApiService = inject(DatasetApiService);
+  constructor() {}
 
   @Selector()
   static getDatasets(state: DatasetStateModel) {

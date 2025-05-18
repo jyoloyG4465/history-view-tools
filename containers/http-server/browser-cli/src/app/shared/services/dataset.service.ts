@@ -1,5 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import {
   Dataset,
   deleteDatasetRequest,
@@ -14,7 +14,9 @@ import { Observable } from 'rxjs';
 export class DatasetApiService {
   private baseUrl = 'http://localhost:8000/dataset';
 
-  constructor(private http: HttpClient) {}
+  private http = inject(HttpClient);
+
+  constructor() {}
 
   getDatasetList(): Observable<Dataset[]> {
     return this.http.get<Dataset[]>(`${this.baseUrl}/v1/list/`);

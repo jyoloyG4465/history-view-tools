@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonPrimaryComponent } from '@app/shared/button-primary/button-primary.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -10,7 +10,9 @@ import { TranslateModule } from '@ngx-translate/core';
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
-  constructor(private router: Router) {}
+  private router = inject(Router);
+
+  constructor() {}
 
   onDataPrepareClick() {
     this.router.navigate(['/data-preparation']);

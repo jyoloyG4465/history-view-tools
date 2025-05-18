@@ -1,5 +1,5 @@
 import { HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import {
   getChannelListResponse,
   postGetDataResponse,
@@ -13,7 +13,9 @@ import { Observable, Subject, switchMap } from 'rxjs';
   providedIn: 'root',
 })
 export class AnalysisService {
-  constructor(private analysisApiService: AnalysisApiService) {}
+  private analysisApiService = inject(AnalysisApiService);
+
+  constructor() {}
 
   postGetData(
     datasetId: number,

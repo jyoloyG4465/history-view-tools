@@ -29,7 +29,9 @@ export class DatasetImportComponent {
     return !this.selectedFile || !this.datasetName;
   }
 
-  constructor(private translate: TranslateService) {}
+  private translate = inject(TranslateService);
+
+  constructor() {}
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;

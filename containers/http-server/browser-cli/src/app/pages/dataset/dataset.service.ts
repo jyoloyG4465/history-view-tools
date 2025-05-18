@@ -1,5 +1,5 @@
 import { HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Dataset, postDatasetCreateResopnse } from '@app/models/dataset.model';
 import { DatasetApiService } from '@app/shared/services/dataset.service';
 import { Observable, Subject, switchMap } from 'rxjs';
@@ -8,7 +8,9 @@ import { Observable, Subject, switchMap } from 'rxjs';
   providedIn: 'root',
 })
 export class DatasetService {
-  constructor(private datasetApiService: DatasetApiService) {}
+  private datasetApiService = inject(DatasetApiService);
+
+  constructor() {}
 
   putDatasetRename(datasetId: number, datasetName: string): Observable<void> {
     const request = { datasetId, datasetName };

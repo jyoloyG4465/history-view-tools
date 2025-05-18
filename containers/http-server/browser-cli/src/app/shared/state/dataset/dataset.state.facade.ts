@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { DatasetState, SetDatasets } from './dataset.state';
@@ -6,7 +6,9 @@ import { Dataset } from '@app/models/dataset.model';
 
 @Injectable({ providedIn: 'root' })
 export class DatasetStateFacade {
-  constructor(private store: Store) {}
+  private store = inject(Store);
+
+  constructor() {}
 
   get getDatasets$(): Observable<Dataset[]> {
     return this.store.select(DatasetState.getDatasets);
