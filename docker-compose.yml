@@ -26,6 +26,7 @@ services:
     container_name: http-server
     ports:
       - "4200:4200"
+      # - "8080:80"
     volumes:
       - ./containers/http-server:/code  # index.html がここにある！
     tty: true
