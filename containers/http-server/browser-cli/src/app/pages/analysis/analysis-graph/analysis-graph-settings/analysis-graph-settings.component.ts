@@ -1,4 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { AnalysisStateFacade } from '../../state/analysis.state.facade';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-analysis-graph-settings',
@@ -7,9 +9,9 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrl: './analysis-graph-settings.component.scss',
 })
 export class AnalysisGraphSettingsComponent {
-  @Output() graphTypeChangeEvent = new EventEmitter<string>();
+  private analysisStateFacade = inject(AnalysisStateFacade);
 
   onClickImage(graphType: string): void {
-    this.graphTypeChangeEvent.emit(graphType);
+    this.analysisStateFacade.setGraphType(graphType);
   }
 }

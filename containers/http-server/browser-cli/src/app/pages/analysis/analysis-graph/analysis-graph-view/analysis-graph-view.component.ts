@@ -1,9 +1,10 @@
 import { Component, inject, Input } from '@angular/core';
 import { graphData } from '@app/models/analysis.model';
 import { NgxEchartsModule } from 'ngx-echarts';
-import { map, Observable, tap } from 'rxjs';
+import { combineLatest, map, Observable, tap } from 'rxjs';
 import { AnalysisStateFacade } from '../../state/analysis.state.facade';
 import { CommonModule } from '@angular/common';
+import { EChartsCoreOption } from 'echarts/core';
 
 @Component({
   selector: 'app-analysis-graph-view',
@@ -12,28 +13,29 @@ import { CommonModule } from '@angular/common';
   styleUrl: './analysis-graph-view.component.scss',
 })
 export class AnalysisGraphViewComponent {
-  @Input() graphType!: string;
-
-  @Input() channelName!: string;
-
   private analysisStateFacade = inject(AnalysisStateFacade);
 
-  chartOptions$: Observable<any> = this.analysisStateFacade.graphData$.pipe(
-    map((graphData) => this.updateChartOption(graphData))
+  chartOptions$: Observable<EChartsCoreOption> = combineLatest([
+    this.analysisStateFacade.graphData$,
+    this.analysisStateFacade.graphType$,
+  ]).pipe(
+    map(([graphData, graphType]) =>
+      this.updateChartOption(graphData, graphType)
+    )
   );
 
-  private updateChartOption(graphData: graphData[]) {
+  private updateChartOption(graphData: graphData[], graphType: string) {
     const categories = graphData.map((item) => item.yearMonth);
     const values = graphData.map((item) => item.total);
     let type: string;
 
-    if (this.graphType !== 'line') {
+    if (graphType !== 'line') {
       type = 'bar';
     } else {
       type = 'line';
     }
 
-    if (this.graphType === 'horizonalBar') {
+    if (graphType === 'horizonalBar') {
       return {
         title: {
           text: '分析結果',

@@ -16,15 +16,7 @@ import { Observable } from 'rxjs';
   styleUrl: './analysis-graph.component.scss',
 })
 export class AnalysisGraphComponent {
-  @Input() channelName!: string;
-
   private analysisStateFacade = inject(AnalysisStateFacade);
 
   hasGraphData$: Observable<boolean> = this.analysisStateFacade.hasGraphData$;
-
-  graphType: string = 'verticalBar';
-
-  onGraphTypeChange(event: string) {
-    this.graphType = event;
-  }
 }

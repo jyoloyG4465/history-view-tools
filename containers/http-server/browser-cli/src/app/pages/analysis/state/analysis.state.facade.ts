@@ -1,7 +1,12 @@
 import { inject, Injectable } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { AnalysisState, FetchChannelList, GetData } from './analysis.state';
+import {
+  AnalysisState,
+  FetchChannelList,
+  GetData,
+  SetGraphType,
+} from './analysis.state';
 import { graphData } from '@app/models/analysis.model';
 
 @Injectable({ providedIn: 'root' })
@@ -24,11 +29,19 @@ export class AnalysisStateFacade {
     return this.store.select(AnalysisState.hasGraphData);
   }
 
+  get graphType$(): Observable<string> {
+    return this.store.select(AnalysisState.graphType);
+  }
+
   fetchChannelList(datasetId: number): Observable<void> {
     return this.store.dispatch(new FetchChannelList(datasetId));
   }
 
   getData(datasetId: number, channelName: string): Observable<void> {
     return this.store.dispatch(new GetData(datasetId, channelName));
+  }
+
+  setGraphType(graphType: string): Observable<void> {
+    return this.store.dispatch(new SetGraphType(graphType));
   }
 }

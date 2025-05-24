@@ -8,6 +8,7 @@ import { graphData } from '@app/models/analysis.model';
 export interface AnalysisStateModel {
   channelList: string[];
   graphData: graphData[];
+  graphType: string;
 }
 
 export class FetchChannelList {
@@ -20,12 +21,18 @@ export class GetData {
   constructor(public datasetId: number, public datasetName: string) {}
 }
 
+export class SetGraphType {
+  static readonly type = '[AnalysisState] set Graph Type';
+  constructor(public graphType: string) {}
+}
+
 @Injectable()
 @State<AnalysisStateModel>({
   name: 'analysis',
   defaults: {
     channelList: [],
     graphData: [],
+    graphType: 'verticalBar',
   },
 })
 export class AnalysisState {
@@ -45,6 +52,11 @@ export class AnalysisState {
   @Selector()
   static hasGraphData(state: AnalysisStateModel): boolean {
     return state.graphData.length > 0;
+  }
+
+  @Selector()
+  static graphType(state: AnalysisStateModel): string {
+    return state.graphType;
   }
 
   @Action(FetchChannelList)
@@ -79,5 +91,13 @@ export class AnalysisState {
           map(() => undefined)
         );
     }
+  }
+
+  @Action(SetGraphType)
+  setGraphType(
+    ctx: StateContext<AnalysisStateModel>,
+    action: SetGraphType
+  ): void {
+    ctx.patchState({ graphType: action.graphType });
   }
 }

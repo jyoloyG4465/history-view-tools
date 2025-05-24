@@ -21,10 +21,6 @@ import { AnalysisStateFacade } from './state/analysis.state.facade';
   styleUrl: './analysis.component.scss',
 })
 export class AnalysisComponent {
-  channelName: string = '';
-
-  selectedDatasetId!: number;
-
   private datasetStateFacade = inject(DatasetStateFacade);
   private analysisStateFacade = inject(AnalysisStateFacade);
 
