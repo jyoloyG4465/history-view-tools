@@ -8,7 +8,8 @@ import { DatasetListComponent } from './dataset-list/dataset-list.component';
 import { Dataset, putDatasetRenameRequest } from '@app/models/dataset.model';
 import { DatasetService } from './dataset.service';
 import { DatasetStateFacade } from '@app/shared/state/dataset/dataset.state.facade';
-import { LoadingStateFacade } from '@app/shared/state/loading/loading.state.facade';
+import { LoadingService } from '@app/shared/services/loading.service';
+import { LoadingKeys } from '@app/shared/enum/loading-name';
 
 @Component({
   selector: 'app-dataset',
@@ -25,7 +26,7 @@ import { LoadingStateFacade } from '@app/shared/state/loading/loading.state.faca
 export class DatasetComponent implements OnInit {
   private datasetService = inject(DatasetService);
   private datasetStateFacade = inject(DatasetStateFacade);
-  private loadingStateFacade = inject(LoadingStateFacade);
+  private loadingService = inject(LoadingService);
 
   datasetList$: Observable<Dataset[]> = this.datasetStateFacade.getDatasets$;
 
@@ -37,14 +38,14 @@ export class DatasetComponent implements OnInit {
 
   async onUploadFile(formData: FormData): Promise<void> {
     try {
-      this.loadingStateFacade.startLoading('createDataset');
+      this.loadingService.start(LoadingKeys.CreateDataset);
       await lastValueFrom(this.datasetService.createDataset(formData));
       this.datasetStateFacade.fetchDatasetList();
       alert('ファイル取り込みに成功しました');
     } catch (err) {
       alert('ファイル取り込みに失敗しました');
     } finally {
-      this.loadingStateFacade.stopLoading('createDataset');
+      this.loadingService.stop(LoadingKeys.CreateDataset);
     }
   }
 

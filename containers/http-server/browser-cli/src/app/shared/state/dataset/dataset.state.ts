@@ -3,7 +3,6 @@ import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { finalize, map, Observable, tap } from 'rxjs';
 import { inject, Injectable } from '@angular/core';
 import { DatasetApiService } from '@app/shared/services/dataset.service';
-import { LoadingStateFacade } from '@app/shared/state/loading/loading.state.facade';
 
 // Stateの状態の型
 export interface DatasetStateModel {
@@ -24,7 +23,6 @@ export class SetDatasets {
 })
 export class DatasetState {
   private datasetApiService = inject(DatasetApiService);
-  private loadingStateFacade = inject(LoadingStateFacade);
   constructor() {}
 
   @Selector()
@@ -34,17 +32,12 @@ export class DatasetState {
 
   @Action(SetDatasets)
   setDatasets(ctx: StateContext<DatasetStateModel>): Observable<void> {
-    this.loadingStateFacade.startLoading('fetchDatasetList');
     {
       return this.datasetApiService.getDatasetList().pipe(
         tap((datasets) => {
           ctx.patchState({ datasets });
         }),
-        map(() => undefined),
-        finalize(() => {
-          // ローディング終了
-          this.loadingStateFacade.stopLoading('fetchDatasetList');
-        })
+        map(() => undefined)
       );
     }
   }

@@ -2,10 +2,10 @@ import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './layout/header/header.component';
 import { NavigationComponent } from './layout/navigation/navigation.component';
-import { LoadingStateFacade } from './shared/state/loading/loading.state.facade';
 import { Observable } from 'rxjs';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { CommonModule } from '@angular/common';
+import { LoadingService } from './shared/services/loading.service';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +22,7 @@ import { CommonModule } from '@angular/common';
 export class AppComponent {
   title = 'browser-cli';
 
-  private loadingStateFacade = inject(LoadingStateFacade);
+  private loadingService = inject(LoadingService);
 
-  isLoading$: Observable<boolean> = this.loadingStateFacade.isLoading$;
+  isLoading$: Observable<boolean> = this.loadingService.isLoading$;
 }
