@@ -2,16 +2,19 @@ import { CommonModule } from '@angular/common';
 import {
   Component,
   EventEmitter,
+  inject,
   Input,
   OnChanges,
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { getChannelListResponse } from '@app/models/analysis.model';
 import { Dataset } from '@app/models/dataset.model';
 import { ButtonPrimaryComponent } from '@app/shared/button-primary/button-primary.component';
 import { PulldownBoxComponent } from '@app/shared/pulldown-box/pulldown-box.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { AnalysisStateFacade } from '../state/analysis.state.facade';
+import { Observable } from 'rxjs';
+import { MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: 'app-analysis-edit',
@@ -27,23 +30,26 @@ import { TranslateModule } from '@ngx-translate/core';
 export class AnalysisEditComponent implements OnChanges {
   @Input() datasetList: Dataset[] = [];
 
-  @Input() channelList: getChannelListResponse | undefined;
+  @Input() channelList: string[] | null = [];
 
   @Output() selectedDatasetEvent = new EventEmitter<number>();
 
   @Output() clickAnalysis = new EventEmitter<string>();
 
-  datasetOptions: { label: string; value: number }[] = [];
+  private analysisStateFacade = inject(AnalysisStateFacade);
 
-  channelOptions: { label: string; value: number }[] = [];
+  protected datasetOptions: { label: string; value: number }[] = [];
 
-  selectedDatasetId: number | null = null;
+  protected channelOptions: { label: string; value: number }[] = [];
 
-  selectedChannelId: number = 0;
-
-  analysisOptions: { label: string; value: number }[] = [
-    { label: '月ごとの再生回数', value: 1 },
+  protected analysisOptions: { label: string; value: number }[] = [
+    { label: '月ごとの再生回数', value: 0 },
   ];
+
+  protected selectedDatasetId$: Observable<number | null> =
+    this.analysisStateFacade.getSelectedDatasetId$;
+
+  protected selectedChannelId: number = 0;
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['datasetList']) {
@@ -53,25 +59,24 @@ export class AnalysisEditComponent implements OnChanges {
     }
 
     if (changes['channelList'] && this.channelList) {
-      this.channelOptions = this.channelList?.data.map((d, index) => {
+      this.channelOptions = this.channelList.map((d, index) => {
         return { label: d, value: index };
       });
     }
   }
 
+  onSelectDataset(event: MatSelectChange<any>) {
+    this.analysisStateFacade.setSelectedDatasetId(event.value);
+    this.analysisStateFacade.setChannelList();
+  }
+
   onAnalysisClick() {
-    const channelName = this.channelOptions?.find(
-      (d) => d.value === this.selectedChannelId
-    )?.label;
+    const channelName =
+      this.analysisStateFacade.getChannelList[this.selectedChannelId];
     this.clickAnalysis.emit(channelName);
   }
 
-  onSelectDataset(event: { label: string; value: number }) {
-    this.selectedDatasetEvent.emit(event.value);
-    this.selectedDatasetId = event.value;
-  }
-
-  onSelectChannel(event: { label: string; value: number }) {
+  onSelectChannel(event: MatSelectChange<any>) {
     this.selectedChannelId = event.value;
   }
 }

@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatOptionModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
+import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-pulldown-box',
@@ -19,14 +19,11 @@ import { MatSelectModule } from '@angular/material/select';
 })
 export class PulldownBoxComponent {
   @Input() label: string = '';
-  @Input() options: { label: string; value: number }[] = [];
-  @Input() selectedValue: any;
-  @Output() selectedValueChangeEvent = new EventEmitter<{
-    label: string;
-    value: number;
-  }>();
+  @Input() options: { label: string; value: number }[] | null = [];
+  @Input() selectedValue: number | null = null;
+  @Output() selectedValueChangeEvent = new EventEmitter<MatSelectChange<any>>();
 
-  onChange(event: any) {
+  onChange(event: MatSelectChange<any>) {
     this.selectedValueChangeEvent.emit(event);
   }
 }

@@ -2,17 +2,15 @@
   <div class="title">{{ "analysis display" | translate }}</div>
   <div class="layout-row">
     <div class="edit-list">
-      <ng-container *ngIf="datasetList.length > 0">
+      <ng-container *ngIf="datasetList$ | async as datasetList">
         <app-analysis-edit
+          *ngIf="datasetList.length > 0"
           [datasetList]="datasetList"
-          [channelList]="channelList"
-          (selectedDatasetEvent)="onSelectDataset($event)"
+          [channelList]="channelList$ | async"
           (clickAnalysis)="onClickAnalysis($event)"
         ></app-analysis-edit>
-      </ng-container>
 
-      <ng-container *ngIf="datasetList.length == 0">
-        <div class="no-dataset-message">
+        <div *ngIf="datasetList.length === 0" class="no-dataset-message">
           {{ "データセットが登録されていません" | translate }}
         </div>
       </ng-container>

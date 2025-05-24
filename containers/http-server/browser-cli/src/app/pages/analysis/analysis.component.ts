@@ -4,13 +4,11 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AnalysisEditComponent } from './analysis-edit/analysis-edit.component';
 import { AnalysisGraphComponent } from './analysis-graph/analysis-graph.component';
 import { Dataset } from '@app/models/dataset.model';
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, Observable } from 'rxjs';
 import { AnalysisService } from './analysis.service';
-import {
-  getChannelListResponse,
-  postGetDataResponse,
-} from '@app/models/analysis.model';
+import { postGetDataResponse } from '@app/models/analysis.model';
 import { DatasetStateFacade } from '@app/shared/state/dataset/dataset.state.facade';
+import { AnalysisStateFacade } from './state/analysis.state.facade';
 
 @Component({
   selector: 'app-analysis',
@@ -24,10 +22,6 @@ import { DatasetStateFacade } from '@app/shared/state/dataset/dataset.state.faca
   styleUrl: './analysis.component.scss',
 })
 export class AnalysisComponent {
-  datasetList: Dataset[] = [];
-
-  channelList: getChannelListResponse | undefined;
-
   graphData: postGetDataResponse | undefined;
 
   channelName: string = '';
@@ -36,24 +30,21 @@ export class AnalysisComponent {
 
   private analysisService = inject(AnalysisService);
   private datasetStateFacade = inject(DatasetStateFacade);
+  private analysisStateFacade = inject(AnalysisStateFacade);
 
-  constructor() {}
+  datasetList$: Observable<Dataset[]> = this.datasetStateFacade.getDatasets$;
+
+  channelList$: Observable<string[]> = this.analysisStateFacade.getChannelList$;
 
   ngOnInit() {
     this.datasetStateFacade.fetchDatasetList();
   }
 
-  async onSelectDataset(event: number) {
-    this.selectedDatasetId = event;
-    this.channelList = await lastValueFrom(
-      this.analysisService.getChannelList(this.selectedDatasetId)
-    );
-  }
-
   async onClickAnalysis(event: string) {
     this.channelName = event;
+    const selectedDatasetId = this.analysisStateFacade.getSelectedDatasetId;
     this.graphData = await lastValueFrom(
-      this.analysisService.postGetData(this.selectedDatasetId, event)
+      this.analysisService.postGetData(selectedDatasetId, event)
     );
   }
 }
