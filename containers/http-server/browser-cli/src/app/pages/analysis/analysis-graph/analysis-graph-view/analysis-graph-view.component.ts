@@ -1,10 +1,11 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { graphData } from '@app/models/analysis.model';
 import { NgxEchartsModule } from 'ngx-echarts';
-import { combineLatest, map, Observable, tap } from 'rxjs';
-import { AnalysisStateFacade } from '../../state/analysis.state.facade';
+import { combineLatest, map, Observable } from 'rxjs';
+import { AnalysisStateFacade } from '@pages/analysis/state/analysis.state.facade';
 import { CommonModule } from '@angular/common';
 import { EChartsCoreOption } from 'echarts/core';
+import { GraphType } from '@pages/analysis/analysis.enum';
 
 @Component({
   selector: 'app-analysis-graph-view',
@@ -24,18 +25,18 @@ export class AnalysisGraphViewComponent {
     )
   );
 
-  private updateChartOption(graphData: graphData[], graphType: string) {
+  private updateChartOption(graphData: graphData[], graphType: GraphType) {
     const categories = graphData.map((item) => item.yearMonth);
     const values = graphData.map((item) => item.total);
     let type: string;
 
-    if (graphType !== 'line') {
+    if (graphType !== GraphType.Line) {
       type = 'bar';
     } else {
       type = 'line';
     }
 
-    if (graphType === 'horizonalBar') {
+    if (graphType === GraphType.HorizontalBar) {
       return {
         title: {
           text: '分析結果',

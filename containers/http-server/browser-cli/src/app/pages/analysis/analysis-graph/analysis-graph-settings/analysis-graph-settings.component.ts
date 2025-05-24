@@ -1,6 +1,6 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
-import { AnalysisStateFacade } from '../../state/analysis.state.facade';
-import { Observable } from 'rxjs';
+import { Component, inject } from '@angular/core';
+import { AnalysisStateFacade } from '@pages/analysis/state/analysis.state.facade';
+import { GraphType } from '@pages/analysis/analysis.enum';
 
 @Component({
   selector: 'app-analysis-graph-settings',
@@ -11,7 +11,9 @@ import { Observable } from 'rxjs';
 export class AnalysisGraphSettingsComponent {
   private analysisStateFacade = inject(AnalysisStateFacade);
 
-  onClickImage(graphType: string): void {
+  protected graphType = GraphType;
+
+  onClickImage(graphType: GraphType): void {
     this.analysisStateFacade.setGraphType(graphType);
   }
 }

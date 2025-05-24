@@ -14,7 +14,6 @@ import { PulldownBoxComponent } from '@app/shared/pulldown-box/pulldown-box.comp
 import { TranslateModule } from '@ngx-translate/core';
 import { AnalysisStateFacade } from '../state/analysis.state.facade';
 import { MatSelectChange } from '@angular/material/select';
-import { AnalysisService } from '../analysis.service';
 
 @Component({
   selector: 'app-analysis-edit',
@@ -35,7 +34,6 @@ export class AnalysisEditComponent implements OnChanges {
   @Output() clickAnalysis = new EventEmitter<string>();
 
   private analysisStateFacade = inject(AnalysisStateFacade);
-  private analysisService = inject(AnalysisService);
 
   protected datasetOptions: { label: string; value: number }[] = [];
 

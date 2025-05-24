@@ -4,7 +4,7 @@ import { Dataset } from '@app/models/dataset.model';
 import { FormsModule } from '@angular/forms';
 import { NoborderTextBoxComponent } from '@app/shared/input/noborder-text-box/noborder-text-box.component';
 import { TranslateModule } from '@ngx-translate/core';
-import { DatasetService } from '../../dataset.service';
+import { DatasetService } from '@pages/dataset/dataset.service';
 
 @Component({
   selector: 'app-dataset-card',

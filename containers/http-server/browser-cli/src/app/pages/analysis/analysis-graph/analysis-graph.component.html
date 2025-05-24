@@ -1,10 +1,8 @@
 <div class="layout-column">
-  <ng-container *ngIf="hasGraphData$ | async">
-    <div class="graph-view">
-      <app-analysis-graph-view></app-analysis-graph-view>
-    </div>
-    <div class="graph-settings">
-      <app-analysis-graph-settings></app-analysis-graph-settings>
-    </div>
-  </ng-container>
+  <div class="graph-view">
+    <app-analysis-graph-view></app-analysis-graph-view>
+  </div>
+  <div class="graph-settings">
+    <app-analysis-graph-settings></app-analysis-graph-settings>
+  </div>
 </div>

@@ -8,6 +8,7 @@ import {
   SetGraphType,
 } from './analysis.state';
 import { graphData } from '@app/models/analysis.model';
+import { GraphType } from '../analysis.enum';
 
 @Injectable({ providedIn: 'root' })
 export class AnalysisStateFacade {
@@ -25,11 +26,7 @@ export class AnalysisStateFacade {
     return this.store.select(AnalysisState.getGraphData);
   }
 
-  get hasGraphData$(): Observable<boolean> {
-    return this.store.select(AnalysisState.hasGraphData);
-  }
-
-  get graphType$(): Observable<string> {
+  get graphType$(): Observable<GraphType> {
     return this.store.select(AnalysisState.graphType);
   }
 
@@ -41,7 +38,7 @@ export class AnalysisStateFacade {
     return this.store.dispatch(new GetData(datasetId, channelName));
   }
 
-  setGraphType(graphType: string): Observable<void> {
+  setGraphType(graphType: GraphType): Observable<void> {
     return this.store.dispatch(new SetGraphType(graphType));
   }
 }

@@ -3,12 +3,13 @@ import { map, Observable, tap } from 'rxjs';
 import { inject, Injectable } from '@angular/core';
 import { AnalysisService } from '../analysis.service';
 import { graphData } from '@app/models/analysis.model';
+import { GraphType } from '../analysis.enum';
 
 // Stateの状態の型
 export interface AnalysisStateModel {
   channelList: string[];
   graphData: graphData[];
-  graphType: string;
+  graphType: GraphType;
 }
 
 export class FetchChannelList {
@@ -23,7 +24,7 @@ export class GetData {
 
 export class SetGraphType {
   static readonly type = '[AnalysisState] set Graph Type';
-  constructor(public graphType: string) {}
+  constructor(public graphType: GraphType) {}
 }
 
 @Injectable()
@@ -32,7 +33,7 @@ export class SetGraphType {
   defaults: {
     channelList: [],
     graphData: [],
-    graphType: 'verticalBar',
+    graphType: GraphType.VerticalBar,
   },
 })
 export class AnalysisState {
@@ -50,12 +51,7 @@ export class AnalysisState {
   }
 
   @Selector()
-  static hasGraphData(state: AnalysisStateModel): boolean {
-    return state.graphData.length > 0;
-  }
-
-  @Selector()
-  static graphType(state: AnalysisStateModel): string {
+  static graphType(state: AnalysisStateModel): GraphType {
     return state.graphType;
   }
 

@@ -4,8 +4,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AnalysisEditComponent } from './analysis-edit/analysis-edit.component';
 import { AnalysisGraphComponent } from './analysis-graph/analysis-graph.component';
 import { Dataset } from '@app/models/dataset.model';
-import { Observable, tap } from 'rxjs';
-import { graphData, postGetDataResponse } from '@app/models/analysis.model';
+import { Observable } from 'rxjs';
 import { DatasetStateFacade } from '@app/shared/state/dataset/dataset.state.facade';
 import { AnalysisStateFacade } from './state/analysis.state.facade';
 
