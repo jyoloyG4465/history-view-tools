@@ -5,16 +5,11 @@ import { AnalysisService } from '../analysis.service';
 
 // Stateの状態の型
 export interface AnalysisStateModel {
-  selectedDatasetId: number | null;
   channelList: string[];
 }
 
-export class SetChannelList {
-  static readonly type = '[AnalysisState] Set ChannelList';
-  constructor(public datasetId: number) {}
-}
-export class SetSelectedDatasetId {
-  static readonly type = '[AnalysisState] Set selectedDatasetId';
+export class FetchChannelList {
+  static readonly type = '[AnalysisState] Fetch ChannelList';
   constructor(public datasetId: number) {}
 }
 
@@ -22,7 +17,6 @@ export class SetSelectedDatasetId {
 @State<AnalysisStateModel>({
   name: 'analysis',
   defaults: {
-    selectedDatasetId: null,
     channelList: [],
   },
 })
@@ -31,27 +25,14 @@ export class AnalysisState {
   constructor() {}
 
   @Selector()
-  static getSelectedDatasetId(state: AnalysisStateModel) {
-    return state.selectedDatasetId;
-  }
-
-  @Selector()
   static getchannelList(state: AnalysisStateModel) {
     return state.channelList;
   }
 
-  @Action(SetSelectedDatasetId)
-  setSelectedDatasetId(
-    ctx: StateContext<AnalysisStateModel>,
-    action: SetSelectedDatasetId
-  ): void {
-    ctx.patchState({ selectedDatasetId: action.datasetId });
-  }
-
-  @Action(SetChannelList)
+  @Action(FetchChannelList)
   SetChannelList(
     ctx: StateContext<AnalysisStateModel>,
-    action: SetChannelList
+    action: FetchChannelList
   ): Observable<void> {
     {
       return this.analysisService.getChannelList(action.datasetId).pipe(

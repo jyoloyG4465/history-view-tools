@@ -7,7 +7,6 @@
           *ngIf="datasetList.length > 0"
           [datasetList]="datasetList"
           [channelList]="channelList$ | async"
-          (clickAnalysis)="onClickAnalysis($event)"
         ></app-analysis-edit>
 
         <div *ngIf="datasetList.length === 0" class="no-dataset-message">

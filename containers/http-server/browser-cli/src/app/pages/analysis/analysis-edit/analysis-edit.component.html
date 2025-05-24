@@ -2,11 +2,11 @@
   <app-pulldown-box
     [label]="'select dataset' | translate"
     [options]="datasetOptions"
-    [selectedValue]="selectedDatasetId$ | async"
+    [selectedValue]="selectedDatasetId"
     (selectedValueChangeEvent)="onSelectDataset($event)"
   >
   </app-pulldown-box>
-  <ng-container *ngIf="(selectedDatasetId$ | async) !== null">
+  <ng-container *ngIf="selectedDatasetId !== 0">
     <app-pulldown-box
       [label]="'analysis target' | translate"
       [options]="analysisOptions"

@@ -13,8 +13,8 @@ import { ButtonPrimaryComponent } from '@app/shared/button-primary/button-primar
 import { PulldownBoxComponent } from '@app/shared/pulldown-box/pulldown-box.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { AnalysisStateFacade } from '../state/analysis.state.facade';
-import { Observable } from 'rxjs';
 import { MatSelectChange } from '@angular/material/select';
+import { AnalysisService } from '../analysis.service';
 
 @Component({
   selector: 'app-analysis-edit',
@@ -32,11 +32,10 @@ export class AnalysisEditComponent implements OnChanges {
 
   @Input() channelList: string[] | null = [];
 
-  @Output() selectedDatasetEvent = new EventEmitter<number>();
-
   @Output() clickAnalysis = new EventEmitter<string>();
 
   private analysisStateFacade = inject(AnalysisStateFacade);
+  private analysisService = inject(AnalysisService);
 
   protected datasetOptions: { label: string; value: number }[] = [];
 
@@ -46,8 +45,7 @@ export class AnalysisEditComponent implements OnChanges {
     { label: '月ごとの再生回数', value: 0 },
   ];
 
-  protected selectedDatasetId$: Observable<number | null> =
-    this.analysisStateFacade.getSelectedDatasetId$;
+  protected selectedDatasetId: number = 0;
 
   protected selectedChannelId: number = 0;
 
@@ -66,17 +64,19 @@ export class AnalysisEditComponent implements OnChanges {
   }
 
   onSelectDataset(event: MatSelectChange<any>) {
-    this.analysisStateFacade.setSelectedDatasetId(event.value);
-    this.analysisStateFacade.setChannelList();
+    this.selectedDatasetId = event.value;
+    this.analysisStateFacade.fetchChannelList(this.selectedDatasetId);
+  }
+
+  onSelectChannel(event: MatSelectChange<any>) {
+    this.selectedChannelId = event.value;
   }
 
   onAnalysisClick() {
     const channelName =
       this.analysisStateFacade.getChannelList[this.selectedChannelId];
-    this.clickAnalysis.emit(channelName);
-  }
-
-  onSelectChannel(event: MatSelectChange<any>) {
-    this.selectedChannelId = event.value;
+    this.analysisService
+      .postGetData(this.selectedDatasetId, channelName)
+      .subscribe();
   }
 }
