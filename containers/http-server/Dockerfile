@@ -35,5 +35,5 @@ FROM nginx:stable
 
 COPY ./containers/http-server/nginx.conf /etc/nginx/nginx.conf
 
-COPY ./containers/http-server/browser-cli/dist/browser-cli/ /usr/share/nginx/html
+COPY --from=builder /app/dist/browser-cli/ /usr/share/nginx/html
 
