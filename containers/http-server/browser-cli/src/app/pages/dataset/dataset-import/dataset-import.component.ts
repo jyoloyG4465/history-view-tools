@@ -3,6 +3,7 @@ import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { ButtonPrimaryComponent } from '@app/shared/button-primary/button-primary.component';
 import { LabelTextBoxComponent } from '@app/shared/input/label-text-box/label-text-box.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { DatasetService } from '../dataset.service';
 
 @Component({
   selector: 'app-dataset-import',
@@ -30,6 +31,7 @@ export class DatasetImportComponent {
   }
 
   private translate = inject(TranslateService);
+  private datasetSetvice = inject(DatasetService);
 
   constructor() {}
 
@@ -46,12 +48,7 @@ export class DatasetImportComponent {
       alert(this.translate.instant('please choice file'));
       return;
     }
-
-    const formData = new FormData();
-    formData.append('file', this.selectedFile);
-    formData.append('datasetName', this.datasetName);
-
-    this.uploadFileEvent.emit(formData);
+    this.datasetSetvice.uploadFile(this.selectedFile, this.datasetName);
   }
 
   onValueConfirmed(value: string) {

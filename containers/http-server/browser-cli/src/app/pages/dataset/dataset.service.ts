@@ -1,8 +1,11 @@
 import { HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Dataset, postDatasetCreateResopnse } from '@app/models/dataset.model';
+import { Dataset } from '@app/models/dataset.model';
+import { LoadingKeys } from '@app/shared/enum/loading-name';
 import { DatasetApiService } from '@app/shared/services/dataset.service';
-import { Observable, Subject, switchMap } from 'rxjs';
+import { LoadingService } from '@app/shared/services/loading.service';
+import { DatasetStateFacade } from '@app/shared/state/dataset/dataset.state.facade';
+import { finalize, Observable, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +13,8 @@ import { Observable, Subject, switchMap } from 'rxjs';
 export class DatasetService {
   private datasetApiService = inject(DatasetApiService);
 
-  constructor() {}
+  private loadingService = inject(LoadingService);
+  private datasetStateFacade = inject(DatasetStateFacade);
 
   putDatasetRename(datasetId: number, datasetName: string): Observable<void> {
     const request = { datasetId, datasetName };
@@ -22,11 +26,29 @@ export class DatasetService {
     return this.datasetApiService.deleteDataset(params);
   }
 
-  createDataset(formData: FormData): Observable<postDatasetCreateResopnse> {
-    return this.datasetApiService.postDatasetCreate(formData);
-  }
-
   getDatasetList(): Observable<Dataset[]> {
     return this.datasetApiService.getDatasetList();
+  }
+
+  uploadFile(selectedFile: File, datasetName: string): void {
+    const formData = new FormData();
+    formData.append('file', selectedFile);
+    formData.append('datasetName', datasetName);
+
+    this.loadingService.start(LoadingKeys.CreateDataset);
+    this.datasetApiService
+      .postDatasetCreate(formData)
+      .pipe(
+        switchMap(() => this.datasetStateFacade.fetchDatasetList()),
+        finalize(() => this.loadingService.stop(LoadingKeys.CreateDataset))
+      )
+      .subscribe({
+        next: () => {
+          alert('ファイル取り込みに成功しました');
+        },
+        error: () => {
+          alert('ファイル取り込みに失敗しました');
+        },
+      });
   }
 }

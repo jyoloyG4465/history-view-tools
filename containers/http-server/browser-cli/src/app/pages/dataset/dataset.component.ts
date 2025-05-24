@@ -32,21 +32,8 @@ export class DatasetComponent implements OnInit {
 
   constructor() {}
 
-  async ngOnInit() {
+  ngOnInit() {
     this.datasetStateFacade.fetchDatasetList();
-  }
-
-  async onUploadFile(formData: FormData): Promise<void> {
-    try {
-      this.loadingService.start(LoadingKeys.CreateDataset);
-      await lastValueFrom(this.datasetService.createDataset(formData));
-      this.datasetStateFacade.fetchDatasetList();
-      alert('ファイル取り込みに成功しました');
-    } catch (err) {
-      alert('ファイル取り込みに失敗しました');
-    } finally {
-      this.loadingService.stop(LoadingKeys.CreateDataset);
-    }
   }
 
   async onUpdate(event: putDatasetRenameRequest): Promise<void> {
