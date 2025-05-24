@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { AnalysisEditComponent } from './analysis-edit/analysis-edit.component';
 import { AnalysisGraphComponent } from './analysis-graph/analysis-graph.component';
@@ -19,7 +19,7 @@ import { AnalysisStateFacade } from './state/analysis.state.facade';
   templateUrl: './analysis.component.html',
   styleUrl: './analysis.component.scss',
 })
-export class AnalysisComponent {
+export class AnalysisComponent implements OnInit, OnDestroy {
   private datasetStateFacade = inject(DatasetStateFacade);
   private analysisStateFacade = inject(AnalysisStateFacade);
 
@@ -29,5 +29,9 @@ export class AnalysisComponent {
 
   ngOnInit() {
     this.datasetStateFacade.fetchDatasetList();
+  }
+
+  ngOnDestroy(): void {
+    this.analysisStateFacade.reset();
   }
 }

@@ -27,6 +27,10 @@ export class SetGraphType {
   constructor(public graphType: GraphType) {}
 }
 
+export class ResetAnalysisState {
+  static readonly type = '[AnalysisState] Reset';
+}
+
 @Injectable()
 @State<AnalysisStateModel>({
   name: 'analysis',
@@ -95,5 +99,14 @@ export class AnalysisState {
     action: SetGraphType
   ): void {
     ctx.patchState({ graphType: action.graphType });
+  }
+
+  @Action(ResetAnalysisState)
+  resetState(ctx: StateContext<AnalysisStateModel>) {
+    ctx.patchState({
+      channelList: [],
+      graphData: [],
+      graphType: GraphType.VerticalBar,
+    });
   }
 }

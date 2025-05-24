@@ -5,6 +5,7 @@ import {
   AnalysisState,
   FetchChannelList,
   GetData,
+  ResetAnalysisState,
   SetGraphType,
 } from './analysis.state';
 import { graphData } from '@app/models/analysis.model';
@@ -40,5 +41,9 @@ export class AnalysisStateFacade {
 
   setGraphType(graphType: GraphType): Observable<void> {
     return this.store.dispatch(new SetGraphType(graphType));
+  }
+
+  reset(): void {
+    this.store.dispatch(new ResetAnalysisState());
   }
 }
