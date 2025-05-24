@@ -30,7 +30,7 @@ export class AnalysisApiService {
     );
   }
 
-  postDatasetCreate(
+  postGetGraphData(
     request: postGetDataRequest
   ): Observable<postGetDataResponse> {
     return this.http.post<postGetDataResponse>(

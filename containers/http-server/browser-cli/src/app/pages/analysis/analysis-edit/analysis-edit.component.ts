@@ -74,9 +74,7 @@ export class AnalysisEditComponent implements OnChanges {
 
   onAnalysisClick() {
     const channelName =
-      this.analysisStateFacade.getChannelList[this.selectedChannelId];
-    this.analysisService
-      .postGetData(this.selectedDatasetId, channelName)
-      .subscribe();
+      this.analysisStateFacade.channelList[this.selectedChannelId];
+    this.analysisStateFacade.getData(this.selectedDatasetId, channelName);
   }
 }

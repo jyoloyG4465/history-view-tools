@@ -10,7 +10,7 @@ export class DatasetStateFacade {
 
   constructor() {}
 
-  get getDatasets$(): Observable<Dataset[]> {
+  get datasets$(): Observable<Dataset[]> {
     return this.store.select(DatasetState.getDatasets);
   }
 

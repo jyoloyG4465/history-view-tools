@@ -1,8 +1,7 @@
 <div class="layout-column">
-  <ng-container *ngIf="graphData">
+  <ng-container *ngIf="hasGraphData$ | async">
     <div class="graph-view">
       <app-analysis-graph-view
-        [graphData]="graphData"
         [graphType]="graphType"
         [channelName]="channelName"
       ></app-analysis-graph-view>

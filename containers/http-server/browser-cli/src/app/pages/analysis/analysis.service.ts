@@ -17,12 +17,12 @@ export class AnalysisService {
 
   constructor() {}
 
-  postGetData(
+  getGraphData(
     datasetId: number,
     channelName?: string
   ): Observable<postGetDataResponse> {
     const request = { datasetId, channelName };
-    return this.analysisApiService.postDatasetCreate(request);
+    return this.analysisApiService.postGetGraphData(request);
   }
 
   getChannelList(datasetId: number): Observable<getChannelListResponse> {

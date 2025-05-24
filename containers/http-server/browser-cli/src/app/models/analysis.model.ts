@@ -12,10 +12,10 @@ export interface getChannelListResponse {
 }
 
 export interface postGetDataResponse {
-  data: sample[];
+  data: graphData[];
 }
 
-export interface sample {
+export interface graphData {
   yearMonth: string;
   total: string;
 }

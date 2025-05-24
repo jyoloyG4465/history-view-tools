@@ -4,8 +4,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AnalysisEditComponent } from './analysis-edit/analysis-edit.component';
 import { AnalysisGraphComponent } from './analysis-graph/analysis-graph.component';
 import { Dataset } from '@app/models/dataset.model';
-import { Observable } from 'rxjs';
-import { postGetDataResponse } from '@app/models/analysis.model';
+import { Observable, tap } from 'rxjs';
+import { graphData, postGetDataResponse } from '@app/models/analysis.model';
 import { DatasetStateFacade } from '@app/shared/state/dataset/dataset.state.facade';
 import { AnalysisStateFacade } from './state/analysis.state.facade';
 
@@ -21,8 +21,6 @@ import { AnalysisStateFacade } from './state/analysis.state.facade';
   styleUrl: './analysis.component.scss',
 })
 export class AnalysisComponent {
-  graphData: postGetDataResponse | undefined;
-
   channelName: string = '';
 
   selectedDatasetId!: number;
@@ -30,9 +28,9 @@ export class AnalysisComponent {
   private datasetStateFacade = inject(DatasetStateFacade);
   private analysisStateFacade = inject(AnalysisStateFacade);
 
-  datasetList$: Observable<Dataset[]> = this.datasetStateFacade.getDatasets$;
+  datasetList$: Observable<Dataset[]> = this.datasetStateFacade.datasets$;
 
-  channelList$: Observable<string[]> = this.analysisStateFacade.getChannelList$;
+  channelList$: Observable<string[]> = this.analysisStateFacade.channelList$;
 
   ngOnInit() {
     this.datasetStateFacade.fetchDatasetList();

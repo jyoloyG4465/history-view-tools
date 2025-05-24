@@ -23,7 +23,7 @@ import { DatasetStateFacade } from '@app/shared/state/dataset/dataset.state.faca
 export class DatasetComponent implements OnInit {
   private datasetStateFacade = inject(DatasetStateFacade);
 
-  datasetList$: Observable<Dataset[]> = this.datasetStateFacade.getDatasets$;
+  datasetList$: Observable<Dataset[]> = this.datasetStateFacade.datasets$;
 
   ngOnInit() {
     this.datasetStateFacade.fetchDatasetList();
