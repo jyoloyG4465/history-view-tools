@@ -8,12 +8,12 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { Dataset } from '@app/models/dataset.model';
 import { ButtonPrimaryComponent } from '@app/shared/button-primary/button-primary.component';
 import { PulldownBoxComponent } from '@app/shared/pulldown-box/pulldown-box.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { AnalysisStateFacade } from '../state/analysis.state.facade';
 import { MatSelectChange } from '@angular/material/select';
+import { Dataset } from '@app/model/dataset';
 
 @Component({
   selector: 'app-analysis-edit',

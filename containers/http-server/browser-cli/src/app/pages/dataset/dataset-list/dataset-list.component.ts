@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { DatasetCardComponent } from './dataset-card/dataset-card.component';
 import { CommonModule } from '@angular/common';
-import { Dataset } from '@app/models/dataset.model';
 import { TranslateModule } from '@ngx-translate/core';
+import { Dataset } from '@app/model/dataset';
 
 @Component({
   selector: 'app-dataset-list',

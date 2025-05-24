@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { DatasetState, SetDatasets } from './dataset.state';
-import { Dataset } from '@app/models/dataset.model';
+import { Dataset } from '@app/model/dataset';
 
 @Injectable({ providedIn: 'root' })
 export class DatasetStateFacade {

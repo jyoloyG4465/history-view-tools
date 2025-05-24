@@ -1,0 +1,47 @@
+components:
+  schemas:
+    Dataset:
+      type: object
+      properties:
+        datasetId:
+          type: integer
+        datasetName:
+          type: string
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+      required:
+        - datasetId
+        - datasetName
+        - startDate
+        - endDate
+
+    PutDatasetRenameRequest:
+      type: object
+      properties:
+        datasetId:
+          type: integer
+        datasetName:
+          type: string
+      required:
+        - datasetId
+        - datasetName
+
+    DeleteDatasetRequest:
+      type: object
+      properties:
+        datasetId:
+          type: integer
+      required:
+        - datasetId
+
+    PostDatasetCreateResponse:
+      type: object
+      properties:
+        datasetId:
+          type: integer
+      required:
+        - datasetId

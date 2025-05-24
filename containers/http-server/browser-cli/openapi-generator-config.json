@@ -1,0 +1,8 @@
+{
+  "ngVersion": "17.0.0",
+  "prefix": "Api",
+  "serviceSuffix": "Service",
+  "withSeparateModelsAndApi": true,
+  "apiPackage": "services",
+  "modelPackage": "models"
+}

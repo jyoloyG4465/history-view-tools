@@ -1,0 +1,50 @@
+components:
+  schemas:
+    PostGetDataRequest:
+      type: object
+      properties:
+        datasetId:
+          type: integer
+        channelName:
+          type: string
+      required:
+        - datasetId
+
+    GetChannelListRequest:
+      type: object
+      properties:
+        datasetId:
+          type: integer
+      required:
+        - datasetId
+
+    GetChannelListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: string
+      required:
+        - data
+
+    PostGetDataResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/GraphData'
+      required:
+        - data
+
+    GraphData:
+      type: object
+      properties:
+        yearMonth:
+          type: string
+        total:
+          type: string
+      required:
+        - yearMonth
+        - total

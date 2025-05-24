@@ -3,10 +3,10 @@ import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { AnalysisEditComponent } from './analysis-edit/analysis-edit.component';
 import { AnalysisGraphComponent } from './analysis-graph/analysis-graph.component';
-import { Dataset } from '@app/models/dataset.model';
 import { Observable } from 'rxjs';
 import { DatasetStateFacade } from '@app/shared/state/dataset/dataset.state.facade';
 import { AnalysisStateFacade } from './state/analysis.state.facade';
+import { Dataset } from '@app/model/dataset';
 
 @Component({
   selector: 'app-analysis',

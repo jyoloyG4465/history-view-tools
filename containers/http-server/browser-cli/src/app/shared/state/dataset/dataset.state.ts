@@ -1,8 +1,8 @@
-import { Dataset } from '@app/models/dataset.model';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { map, Observable, tap } from 'rxjs';
 import { inject, Injectable } from '@angular/core';
 import { DatasetApiService } from '@app/shared/services/dataset.service';
+import { Dataset } from '@app/model/dataset';
 
 // Stateの状態の型
 export interface DatasetStateModel {

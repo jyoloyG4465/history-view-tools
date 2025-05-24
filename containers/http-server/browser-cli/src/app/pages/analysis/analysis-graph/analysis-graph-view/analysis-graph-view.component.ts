@@ -1,11 +1,11 @@
 import { Component, inject } from '@angular/core';
-import { graphData } from '@app/models/analysis.model';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { combineLatest, map, Observable } from 'rxjs';
 import { AnalysisStateFacade } from '@pages/analysis/state/analysis.state.facade';
 import { CommonModule } from '@angular/common';
 import { EChartsCoreOption } from 'echarts/core';
 import { GraphType } from '@pages/analysis/analysis.enum';
+import { GraphData } from '@app/model/graphData';
 
 @Component({
   selector: 'app-analysis-graph-view',
@@ -25,7 +25,7 @@ export class AnalysisGraphViewComponent {
     )
   );
 
-  private updateChartOption(graphData: graphData[], graphType: GraphType) {
+  private updateChartOption(graphData: GraphData[], graphType: GraphType) {
     const categories = graphData.map((item) => item.yearMonth);
     const values = graphData.map((item) => item.total);
     let type: string;

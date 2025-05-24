@@ -5,8 +5,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CommonModule } from '@angular/common';
 import { DatasetListComponent } from './dataset-list/dataset-list.component';
-import { Dataset } from '@app/models/dataset.model';
 import { DatasetStateFacade } from '@app/shared/state/dataset/dataset.state.facade';
+import { Dataset } from '@app/model/dataset';
 
 @Component({
   selector: 'app-dataset',

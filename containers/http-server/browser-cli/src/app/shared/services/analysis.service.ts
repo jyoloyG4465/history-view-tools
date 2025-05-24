@@ -1,16 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import {
-  getChannelListResponse,
-  postGetDataRequest,
-  postGetDataResponse,
-} from '@app/models/analysis.model';
-import {
-  Dataset,
-  deleteDatasetRequest,
-  postDatasetCreateResopnse,
-  putDatasetRenameRequest,
-} from '@app/models/dataset.model';
+import { GetChannelListResponse } from '@app/model/getChannelListResponse';
+import { PostGetDataRequest } from '@app/model/postGetDataRequest';
+import { PostGetDataResponse } from '@app/model/postGetDataResponse';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -23,17 +15,17 @@ export class AnalysisApiService {
 
   constructor() {}
 
-  getChannelList(params: HttpParams): Observable<getChannelListResponse> {
-    return this.http.get<getChannelListResponse>(
+  getChannelList(params: HttpParams): Observable<GetChannelListResponse> {
+    return this.http.get<GetChannelListResponse>(
       `${this.baseUrl}/v1/channel-list/`,
       { params }
     );
   }
 
   postGetGraphData(
-    request: postGetDataRequest
-  ): Observable<postGetDataResponse> {
-    return this.http.post<postGetDataResponse>(
+    request: PostGetDataRequest
+  ): Observable<PostGetDataResponse> {
+    return this.http.post<PostGetDataResponse>(
       `${this.baseUrl}/v1/get-data/`,
       request
     );

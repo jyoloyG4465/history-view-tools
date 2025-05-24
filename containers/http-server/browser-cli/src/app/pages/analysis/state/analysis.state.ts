@@ -2,13 +2,13 @@ import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { map, Observable, tap } from 'rxjs';
 import { inject, Injectable } from '@angular/core';
 import { AnalysisService } from '../analysis.service';
-import { graphData } from '@app/models/analysis.model';
 import { GraphType } from '../analysis.enum';
+import { GraphData } from '@app/model/graphData';
 
 // Stateの状態の型
 export interface AnalysisStateModel {
   channelList: string[];
-  graphData: graphData[];
+  graphData: GraphData[];
   graphType: GraphType;
 }
 

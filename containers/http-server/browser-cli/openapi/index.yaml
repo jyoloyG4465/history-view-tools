@@ -1,0 +1,29 @@
+openapi: 3.0.0
+info:
+  title: My API
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000/api
+
+paths: {}
+
+components:
+  schemas:
+    Dataset:
+      $ref: './models/dataset.yaml#/components/schemas/Dataset'
+    PutDatasetRenameRequest:
+      $ref: './models/dataset.yaml#/components/schemas/PutDatasetRenameRequest'
+    DeleteDatasetRequest:
+      $ref: './models/dataset.yaml#/components/schemas/DeleteDatasetRequest'
+    DostDatasetCreateResponse:
+      $ref: './models/dataset.yaml#/components/schemas/PostDatasetCreateResponse'
+    PostGetDataRequest:
+      $ref: './models/analysis.yaml#/components/schemas/PostGetDataRequest'
+    GetChannelListRequest:
+      $ref: './models/analysis.yaml#/components/schemas/GetChannelListRequest'
+    GetChannelListResponse:
+      $ref: './models/analysis.yaml#/components/schemas/GetChannelListResponse'
+    PostGetDataResponse:
+      $ref: './models/analysis.yaml#/components/schemas/PostGetDataResponse'
+    GraphData:
+      $ref: './models/analysis.yaml#/components/schemas/GraphData'

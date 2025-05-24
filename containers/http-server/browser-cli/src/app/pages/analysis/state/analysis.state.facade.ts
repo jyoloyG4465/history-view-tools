@@ -8,8 +8,8 @@ import {
   ResetAnalysisState,
   SetGraphType,
 } from './analysis.state';
-import { graphData } from '@app/models/analysis.model';
 import { GraphType } from '../analysis.enum';
+import { GraphData } from '@app/model/graphData';
 
 @Injectable({ providedIn: 'root' })
 export class AnalysisStateFacade {
@@ -23,7 +23,7 @@ export class AnalysisStateFacade {
     return this.store.selectSnapshot((state) => state.analysis.channelList);
   }
 
-  get graphData$(): Observable<graphData[]> {
+  get graphData$(): Observable<GraphData[]> {
     return this.store.select(AnalysisState.getGraphData);
   }
 
