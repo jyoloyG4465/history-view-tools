@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { DatasetCardComponent } from './dataset-card/dataset-card.component';
 import { CommonModule } from '@angular/common';
-import { Dataset, putDatasetRenameRequest } from '@app/models/dataset.model';
+import { Dataset } from '@app/models/dataset.model';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
@@ -11,19 +11,5 @@ import { TranslateModule } from '@ngx-translate/core';
   styleUrl: './dataset-list.component.scss',
 })
 export class DatasetListComponent {
-  constructor() {}
-
   @Input() datasetList: Dataset[] | null = [];
-
-  @Output() updateEvent = new EventEmitter<putDatasetRenameRequest>();
-
-  @Output() deleteEvent = new EventEmitter<number>();
-
-  onUpdate(event: putDatasetRenameRequest) {
-    this.updateEvent.emit(event);
-  }
-
-  onDelete(datasetId: number): void {
-    this.deleteEvent.emit(datasetId);
-  }
 }

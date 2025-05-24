@@ -10,7 +10,6 @@ import {
   getChannelListResponse,
   postGetDataResponse,
 } from '@app/models/analysis.model';
-import { LoadingStateFacade } from '@app/shared/state/loading/loading.state.facade';
 import { DatasetStateFacade } from '@app/shared/state/dataset/dataset.state.facade';
 
 @Component({
@@ -36,7 +35,6 @@ export class AnalysisComponent {
   selectedDatasetId!: number;
 
   private analysisService = inject(AnalysisService);
-  private loadingStateFacade = inject(LoadingStateFacade);
   private datasetStateFacade = inject(DatasetStateFacade);
 
   constructor() {}
@@ -47,19 +45,15 @@ export class AnalysisComponent {
 
   async onSelectDataset(event: number) {
     this.selectedDatasetId = event;
-    this.loadingStateFacade.startLoading('getChannelList');
     this.channelList = await lastValueFrom(
       this.analysisService.getChannelList(this.selectedDatasetId)
     );
-    this.loadingStateFacade.stopLoading('getChannelList');
   }
 
   async onClickAnalysis(event: string) {
     this.channelName = event;
-    this.loadingStateFacade.startLoading('clickAnalysis');
     this.graphData = await lastValueFrom(
       this.analysisService.postGetData(this.selectedDatasetId, event)
     );
-    this.loadingStateFacade.stopLoading('clickAnalysis');
   }
 }

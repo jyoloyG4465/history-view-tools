@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { Dataset, putDatasetRenameRequest } from '@app/models/dataset.model';
+import { Dataset } from '@app/models/dataset.model';
 import { FormsModule } from '@angular/forms';
 import { NoborderTextBoxComponent } from '@app/shared/input/noborder-text-box/noborder-text-box.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -20,20 +20,13 @@ import { DatasetService } from '../../dataset.service';
 export class DatasetCardComponent {
   @Input() dataset!: Dataset;
 
-  @Output() updateEvent = new EventEmitter<putDatasetRenameRequest>();
+  private datasetService = inject(DatasetService);
 
-  @Output() deleteEvent = new EventEmitter<number>();
-
-  constructor() {}
-
-  onValueConfirmed(value: string) {
-    this.updateEvent.emit({
-      datasetId: this.dataset.datasetId,
-      datasetName: value,
-    });
+  onValueConfirmed(datasetName: string) {
+    this.datasetService.putDatasetRename(this.dataset.datasetId, datasetName);
   }
 
   onDelete(): void {
-    this.deleteEvent.emit(this.dataset.datasetId);
+    this.datasetService.deleteDataset(this.dataset.datasetId);
   }
 }

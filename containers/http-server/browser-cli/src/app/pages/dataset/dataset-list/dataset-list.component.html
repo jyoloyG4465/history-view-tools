@@ -1,10 +1,6 @@
 <div class="card-container">
   <div class="card" *ngFor="let dataset of datasetList">
-    <app-dataset-card
-      [dataset]="dataset"
-      (updateEvent)="onUpdate($event)"
-      (deleteEvent)="onDelete($event)"
-    ></app-dataset-card>
+    <app-dataset-card [dataset]="dataset"></app-dataset-card>
   </div>
   <div *ngIf="datasetList?.length === 0" class="no-data-message">
     {{ "not exist dataset" | translate }}

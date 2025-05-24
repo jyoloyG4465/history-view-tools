@@ -1,16 +1,10 @@
 <div class="content">
   <div class="title">{{ "datasetImport" | translate }}</div>
   <div class="import-box">
-    <app-dataset-import
-      (uploadFileEvent)="onUploadFile($event)"
-    ></app-dataset-import>
+    <app-dataset-import></app-dataset-import>
   </div>
   <div class="title">{{ "datasetList" | translate }}</div>
   <div class="card-list">
-    <app-dataset-list
-      [datasetList]="datasetList$ | async"
-      (updateEvent)="onUpdate($event)"
-      (deleteEvent)="onDelete($event)"
-    ></app-dataset-list>
+    <app-dataset-list [datasetList]="datasetList$ | async"></app-dataset-list>
   </div>
 </div>
