@@ -1,0 +1,26 @@
+name: Black Code Formatter
+
+on:
+  push:
+    branches: [develop/1.0.0]
+  pull_request:
+    branches: [develop/1.0.0]
+
+jobs:
+  black-check:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: チェックアウト
+      uses: actions/checkout@v3
+
+    - name: Python をセットアップ
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'  # 必要に応じて変更
+
+    - name: Black をインストール
+      run: pip install black
+
+    - name: Black を実行（チェックモード）
+      run: black --check .
