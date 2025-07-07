@@ -1,4 +1,4 @@
-name: Black Code Formatter
+name: Format Check
 
 on:
   push:
@@ -11,16 +11,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: チェックアウト
+    - name: checkout
       uses: actions/checkout@v3
 
-    - name: Python をセットアップ
+    - name: setup Python
       uses: actions/setup-python@v4
       with:
         python-version: '3.11'  # 必要に応じて変更
 
-    - name: Black をインストール
-      run: pip install black
+    - name: isntall black and isort
+      run: pip install black isort
 
-    - name: Black を実行（チェックモード）
+    - name: check isort
+      run: isort . --check-only --diff
+
+    - name: check black 
       run: black --check .
