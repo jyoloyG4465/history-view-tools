@@ -8,6 +8,7 @@ import { DatasetStateFacade } from '@app/shared/state/dataset/dataset.state.faca
 import { AnalysisStateFacade } from './state/analysis.state.facade';
 import { BehaviorSubject, of } from 'rxjs'; // BehaviorSubjectをインポート
 import { Dataset } from '@app/model/dataset';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 describe('AnalysisComponent', () => {
   let component: AnalysisComponent;
@@ -24,14 +25,21 @@ describe('AnalysisComponent', () => {
     datasetsSubject = new BehaviorSubject<Dataset[]>([]);
     channelListSubject = new BehaviorSubject<string[]>([]);
 
-    mockDatasetStateFacade = jasmine.createSpyObj('DatasetStateFacade', ['fetchDatasetList']);
+    mockDatasetStateFacade = jasmine.createSpyObj('DatasetStateFacade', [
+      'fetchDatasetList',
+    ]);
     // datasets$ プロパティに BehaviorSubject を割り当てる
-    Object.defineProperty(mockDatasetStateFacade, 'datasets$', { value: datasetsSubject.asObservable() });
+    Object.defineProperty(mockDatasetStateFacade, 'datasets$', {
+      value: datasetsSubject.asObservable(),
+    });
 
-    mockAnalysisStateFacade = jasmine.createSpyObj('AnalysisStateFacade', ['reset']);
+    mockAnalysisStateFacade = jasmine.createSpyObj('AnalysisStateFacade', [
+      'reset',
+    ]);
     // channelList$ プロパティに BehaviorSubject を割り当てる
-    Object.defineProperty(mockAnalysisStateFacade, 'channelList$', { value: channelListSubject.asObservable() });
-
+    Object.defineProperty(mockAnalysisStateFacade, 'channelList$', {
+      value: channelListSubject.asObservable(),
+    });
 
     await TestBed.configureTestingModule({
       imports: [
@@ -40,6 +48,9 @@ describe('AnalysisComponent', () => {
         AnalysisEditComponent,
         AnalysisGraphComponent,
         AnalysisComponent,
+        NgxEchartsModule.forRoot({
+          echarts: () => import('echarts'),
+        }),
       ],
       providers: [
         { provide: DatasetStateFacade, useValue: mockDatasetStateFacade },
@@ -66,10 +77,17 @@ describe('AnalysisComponent', () => {
   });
 
   it('should expose datasetList$ from DatasetStateFacade', () => {
-    const testDatasets: Dataset[] = [{ datasetId: 1, datasetName: 'Test Dataset', startDate: '2023-01-01', endDate: '2023-01-31' }];
+    const testDatasets: Dataset[] = [
+      {
+        datasetId: 1,
+        datasetName: 'Test Dataset',
+        startDate: '2023-01-01',
+        endDate: '2023-01-31',
+      },
+    ];
     datasetsSubject.next(testDatasets);
     fixture.detectChanges();
-    component.datasetList$.subscribe(datasets => {
+    component.datasetList$.subscribe((datasets) => {
       expect(datasets).toEqual(testDatasets);
     });
   });
@@ -78,7 +96,7 @@ describe('AnalysisComponent', () => {
     const testChannels: string[] = ['channel1', 'channel2'];
     channelListSubject.next(testChannels);
     fixture.detectChanges();
-    component.channelList$.subscribe(channels => {
+    component.channelList$.subscribe((channels) => {
       expect(channels).toEqual(testChannels);
     });
   });
