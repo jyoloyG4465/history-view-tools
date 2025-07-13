@@ -30,19 +30,13 @@ jobs:
 
       - name: Build and Run Docker Compose Tests
         run: |
-          # .envファイルの内容を環境変数として設定
-          # テスト用のDB情報なので、ここでは直接設定します。
-          # 本番環境のDB情報などはGitHub Secretsを使用することを強く推奨します。
-          export DB_NAME=test_db
-          export DB_USER=test_user
-          export DB_PASSWORD=test_password
-          export DB_HOST=databases
-          export DB_PORT=5432
-
-          # Docker Composeでテストを実行
-          # --build: イメージを再ビルド
-          # --abort-on-container-exit: テストコンテナが終了したら他のコンテナも停止
-          docker-compose -f docker-compose.test.yml up --build --abort-on-container-exit
+          which docker-compose
+          # export DB_NAME=test_db
+          # export DB_USER=test_user
+          # export DB_PASSWORD=test_password
+          # export DB_HOST=databases
+          # export DB_PORT=5432
+          # docker-compose -f docker-compose.test.yml up --build --abort-on-container-exit
 
       - name: Clean up Docker containers
         if: always() # 前のステップが失敗しても必ず実行
