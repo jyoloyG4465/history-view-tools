@@ -18,10 +18,14 @@ describe('AnalysisEditComponent', () => {
 
   beforeEach(async () => {
     channelListSubject = new BehaviorSubject<string[]>([]);
-    mockAnalysisStateFacade = jasmine.createSpyObj('AnalysisStateFacade', ['fetchChannelList', 'getData'], {
-      channelList: ['channel_mock_0', 'channel_mock_1'], // channelList プロパティをモック
-      channelList$: channelListSubject.asObservable(),
-    });
+    mockAnalysisStateFacade = jasmine.createSpyObj(
+      'AnalysisStateFacade',
+      ['fetchChannelList', 'getData'],
+      {
+        channelList: ['channel_mock_0', 'channel_mock_1'], // channelList プロパティをモック
+        channelList$: channelListSubject.asObservable(),
+      }
+    );
 
     await TestBed.configureTestingModule({
       imports: [
@@ -47,8 +51,18 @@ describe('AnalysisEditComponent', () => {
 
   it('should update datasetOptions on datasetList change', () => {
     const testDatasetList: Dataset[] = [
-      { datasetId: 1, datasetName: 'Dataset A', startDate: '2023-01-01', endDate: '2023-01-31' },
-      { datasetId: 2, datasetName: 'Dataset B', startDate: '2023-02-01', endDate: '2023-02-28' },
+      {
+        datasetId: 1,
+        datasetName: 'Dataset A',
+        startDate: '2023-01-01',
+        endDate: '2023-01-31',
+      },
+      {
+        datasetId: 2,
+        datasetName: 'Dataset B',
+        startDate: '2023-02-01',
+        endDate: '2023-02-28',
+      },
     ];
     const changes: SimpleChanges = {
       datasetList: new SimpleChange(undefined, testDatasetList, true),
@@ -85,17 +99,5 @@ describe('AnalysisEditComponent', () => {
     const mockEvent: MatSelectChange<any> = { value: 1, source: {} as any };
     component.onSelectChannel(mockEvent);
     expect(component.selectedChannelId).toBe(1);
-  });
-
-  it('should call getData and emit clickAnalysis on onAnalysisClick', () => {
-    component.selectedDatasetId = 1;
-    component.selectedChannelId = 0; // 'channel_mock_0' に対応
-
-    spyOn(component.clickAnalysis, 'emit'); // EventEmitterのemitをスパイ
-
-    component.onAnalysisClick();
-
-    expect(mockAnalysisStateFacade.getData).toHaveBeenCalledWith(1, 'channel_mock_0');
-    expect(component.clickAnalysis.emit).toHaveBeenCalledWith('analysis');
   });
 });

@@ -1,11 +1,9 @@
 import { CommonModule } from '@angular/common';
 import {
   Component,
-  EventEmitter,
   inject,
   Input,
   OnChanges,
-  Output,
   SimpleChanges,
 } from '@angular/core';
 import { ButtonPrimaryComponent } from '@app/shared/button-primary/button-primary.component';
@@ -30,8 +28,6 @@ export class AnalysisEditComponent implements OnChanges {
   @Input() datasetList: Dataset[] = [];
 
   @Input() channelList: string[] | null = [];
-
-  @Output() clickAnalysis = new EventEmitter<string>();
 
   private analysisStateFacade = inject(AnalysisStateFacade);
 
