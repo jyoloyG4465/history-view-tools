@@ -33,9 +33,9 @@ describe('DatasetComponent', () => {
         DatasetImportComponent,
         DatasetListComponent,
         DatasetComponent, // Standalone Componentの場合
-        provideHttpClient(), // これを追加
       ],
       providers: [
+        provideHttpClient(),
         { provide: DatasetStateFacade, useValue: mockDatasetStateFacade },
       ],
     }).compileComponents();
