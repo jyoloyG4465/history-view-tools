@@ -1,0 +1,30 @@
+name: Frontend Tests
+
+on:
+  push:
+    branches: [develop/1.0.0]
+  pull_request:
+    branches: [develop/1.0.0]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18' # Dockerfileに合わせてNode.jsのバージョンを指定
+
+      - name: Install Angular CLI and dependencies
+        run: |
+          npm install -g @angular/cli
+          npm install
+        working-directory: ./containers/http-server/browser-cli # browser-cliディレクトリで実行
+
+      - name: Run Frontend Tests
+        run: ng test --watch=false --browsers=ChromeHeadless # CI環境ではヘッドレスブラウザを使用
+        working-directory: ./containers/http-server/browser-cli # browser-cliディレクトリで実行
