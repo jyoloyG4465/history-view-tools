@@ -5,6 +5,8 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { Dataset } from '@app/model/dataset';
 import { provideHttpClient } from '@angular/common/http';
+import { DatasetState } from '@app/shared/state/dataset/dataset.state';
+import { NgxsModule } from '@ngxs/store';
 
 describe('DatasetListComponent', () => {
   let component: DatasetListComponent;
@@ -16,9 +18,10 @@ describe('DatasetListComponent', () => {
         DatasetCardComponent,
         CommonModule,
         TranslateModule.forRoot(),
-        DatasetListComponent, // Standalone Componentの場合
+        DatasetListComponent,
+        provideHttpClient(),
+        NgxsModule.forRoot([DatasetState]),
       ],
-      providers: [provideHttpClient()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(DatasetListComponent);
