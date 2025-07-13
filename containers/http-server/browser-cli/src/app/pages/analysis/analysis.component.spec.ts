@@ -52,7 +52,7 @@ describe('AnalysisComponent', () => {
       providers: [
         { provide: DatasetStateFacade, useValue: mockDatasetStateFacade },
         { provide: AnalysisStateFacade, useValue: mockAnalysisStateFacade },
-        NGX_ECHARTS_CONFIG,
+        { provide: NGX_ECHARTS_CONFIG, useValue: {} },
       ],
     }).compileComponents();
 
