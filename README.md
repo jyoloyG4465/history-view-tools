@@ -14,9 +14,9 @@
 
 このプロジェクトは、以下の技術で構成されています。
 
-*   **バックエンド (API)**: Python (FastAPI または Django を想定)
+*   **バックエンド (API)**: Python (Django)
     *   データベースとの連携、データ処理、APIエンドポイントの提供を担当します。
-*   **フロントエンド (Web UI)**: HTML, CSS, JavaScript (具体的なフレームワークは未確認ですが、静的ファイルとして提供されます)
+*   **フロントエンド (Web UI)**: Angular (TypeScript)
     *   ユーザーインターフェースの表示、履歴データのインポート、グラフの描画を担当します。
 *   **データベース**: PostgreSQL
     *   インポートされた視聴履歴データを永続的に保存します。
@@ -82,40 +82,43 @@
 
     これにより、`history-view-tools` のWebインターフェースが表示されます。
 
-## 使い方
-
-1.  **YouTube 視聴履歴のダウンロード**:
-    *   YouTube のデータエクスポート機能 (Google Takeout など) を利用して、自身の視聴履歴データをダウンロードします。通常、HTML形式で提供されます。
-
-2.  **履歴データのインポート**:
-    *   `history-view-tools` のWebインターフェースにアクセスします。
-    *   画面上の指示に従い、ダウンロードした視聴履歴ファイル (例: `watch-history.json`) をアップロードします。
-
-3.  **グラフの表示**:
-    *   データが正常にインポートされると、様々な種類のグラフが自動的に生成され、表示されます。
-    *   グラフの種類や表示オプションを切り替えることで、多角的な分析が可能です。
-
 ## プロジェクト構造
 
 ```
 .
 ├── .git/                     # Git リポジトリ関連ファイル
 ├── .github/                  # GitHub Actions ワークフロー
+│   └── workflows/
+│       ├── backend-formatter.yaml
+│       ├── frontend-test.yaml
+│       └── test.yaml
 ├── .mypy_cache/              # MyPy のキャッシュ
 ├── .venv/                    # Python 仮想環境
 ├── containers/
 │   ├── api-server/           # バックエンドAPIサーバーのDocker関連ファイルとソースコード
 │   │   ├── Dockerfile        # APIサーバーのDockerイメージ定義
-│   │   └── entrypoint.sh     # APIサーバーの起動スクリプト
+│   │   ├── entrypoint.sh     # APIサーバーの起動スクリプト
+│   │   ├── pytest.ini        # Pytest 設定ファイル
+│   │   ├── requirements.txt  # アプリケーションの依存関係
+│   │   └── requirements-tests.txt # テスト用の依存関係
 │   ├── databases/            # データベース関連ファイル
 │   │   └── init.sql          # PostgreSQL 初期化スクリプト
 │   └── http-server/          # フロントエンドWebサーバーのDocker関連ファイルと静的ファイル
-│       ├── Dockerfile        # HTTPサーバーのDockerイメージ定義
-│       └── index.html        # フロントエンドのメインHTMLファイル
-├── docker-compose.yml        # Docker Compose 設定ファイル
+│       ├── browser-cli/      # Angular アプリケーションのソースコード
+│       │   └── src/          # Angular アプリケーションのソース
+│       │       └── app/      # Angular アプリケーションのコンポーネントなど
+│       │           └── pages/ # 各ページのコンポーネント
+│       │               ├── analysis/ # analysis ページ
+│       │               ├── data-preparation/ # data-preparation ページ
+│       │               ├── dataset/ # dataset ページ
+│       │               └── home/ # home ページ
+│       └── Dockerfile        # HTTPサーバーのDockerイメージ定義
+│       └── nginx.conf        # Nginx 設定ファイル
+├── docker-compose.yml        # Docker Compose 本番用設定ファイル
+├── docker-compose.test.yml   # Docker Compose テスト用設定ファイル
 ├── host_script.sh            # ホスト側で実行する可能性のあるスクリプト
 ├── postgres_data/            # PostgreSQL のデータ永続化ディレクトリ
+├── postgres_test_data/       # PostgreSQL のテストデータ永続化ディレクトリ
 ├── README.md                 # このREADMEファイル
-├── requirements-venv.txt     # Python 仮想環境用の依存関係リスト
 └── .gitignore                # Git の無視リスト
 ```
