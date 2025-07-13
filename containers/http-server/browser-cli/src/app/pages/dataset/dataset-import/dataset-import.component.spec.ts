@@ -17,7 +17,11 @@ describe('DatasetImportComponent', () => {
     mockTranslateService = jasmine.createSpyObj('TranslateService', [
       'instant',
       'get',
-    ]);
+    ], {
+      onLangChange: of({}),
+      onTranslationChange: of({}),
+      onDefaultLangChange: of({}),
+    });
     mockDatasetService = jasmine.createSpyObj('DatasetService', ['uploadFile']);
     mockTranslateService.get.and.callFake((key: string) => of(key)); // Observableを返す
     mockTranslateService.instant.and.callFake((key: string) => key);
