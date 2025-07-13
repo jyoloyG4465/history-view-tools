@@ -5,6 +5,7 @@ import { DatasetService } from '../dataset.service';
 import { ButtonPrimaryComponent } from '@app/shared/button-primary/button-primary.component';
 import { LabelTextBoxComponent } from '@app/shared/input/label-text-box/label-text-box.component';
 import { CommonModule } from '@angular/common';
+import { of } from 'rxjs';
 
 describe('DatasetImportComponent', () => {
   let component: DatasetImportComponent;
@@ -18,6 +19,8 @@ describe('DatasetImportComponent', () => {
       'get',
     ]);
     mockDatasetService = jasmine.createSpyObj('DatasetService', ['uploadFile']);
+    mockTranslateService.get.and.callFake((key: string) => of(key)); // Observableを返す
+    mockTranslateService.instant.and.callFake((key: string) => key);
 
     await TestBed.configureTestingModule({
       imports: [
