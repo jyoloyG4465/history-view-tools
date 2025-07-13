@@ -8,7 +8,7 @@ import { DatasetListComponent } from './dataset-list/dataset-list.component';
 import { DatasetStateFacade } from '@app/shared/state/dataset/dataset.state.facade';
 import { BehaviorSubject } from 'rxjs';
 import { Dataset } from '@app/model/dataset';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('DatasetComponent', () => {
   let component: DatasetComponent;
@@ -33,7 +33,7 @@ describe('DatasetComponent', () => {
         DatasetImportComponent,
         DatasetListComponent,
         DatasetComponent, // Standalone Componentの場合
-        HttpClientModule, // これを追加
+        provideHttpClient(), // これを追加
       ],
       providers: [
         { provide: DatasetStateFacade, useValue: mockDatasetStateFacade },
