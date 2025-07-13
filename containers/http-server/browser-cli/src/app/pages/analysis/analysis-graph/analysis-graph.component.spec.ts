@@ -3,6 +3,7 @@ import { AnalysisGraphComponent } from './analysis-graph.component';
 import { AnalysisGraphViewComponent } from './analysis-graph-view/analysis-graph-view.component';
 import { AnalysisGraphSettingsComponent } from './analysis-graph-settings/analysis-graph-settings.component';
 import { CommonModule } from '@angular/common';
+import { NgxsModule } from '@ngxs/store';
 
 describe('AnalysisGraphComponent', () => {
   let component: AnalysisGraphComponent;
@@ -15,6 +16,7 @@ describe('AnalysisGraphComponent', () => {
         AnalysisGraphSettingsComponent,
         CommonModule,
         AnalysisGraphComponent, // Standalone Componentの場合
+        NgxsModule.forRoot([]), // これを追加
       ],
     }).compileComponents();
 
