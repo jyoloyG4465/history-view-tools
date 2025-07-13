@@ -13,7 +13,10 @@ describe('DatasetImportComponent', () => {
   let mockDatasetService: jasmine.SpyObj<DatasetService>;
 
   beforeEach(async () => {
-    mockTranslateService = jasmine.createSpyObj('TranslateService', ['instant']);
+    mockTranslateService = jasmine.createSpyObj('TranslateService', [
+      'instant',
+      'get',
+    ]);
     mockDatasetService = jasmine.createSpyObj('DatasetService', ['uploadFile']);
 
     await TestBed.configureTestingModule({
@@ -61,7 +64,10 @@ describe('DatasetImportComponent', () => {
     component.selectedFile = mockFile;
     component.datasetName = 'test_dataset';
     component.uploadFile();
-    expect(mockDatasetService.uploadFile).toHaveBeenCalledWith(mockFile, 'test_dataset');
+    expect(mockDatasetService.uploadFile).toHaveBeenCalledWith(
+      mockFile,
+      'test_dataset'
+    );
   });
 
   it('should set datasetName on onValueConfirmed', () => {
