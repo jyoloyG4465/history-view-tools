@@ -35,17 +35,17 @@ export class AnalysisEditComponent implements OnChanges {
 
   private analysisStateFacade = inject(AnalysisStateFacade);
 
-  protected datasetOptions: { label: string; value: number }[] = [];
+  datasetOptions: { label: string; value: number }[] = [];
 
-  protected channelOptions: { label: string; value: number }[] = [];
+  channelOptions: { label: string; value: number }[] = [];
 
-  protected analysisOptions: { label: string; value: number }[] = [
+  analysisOptions: { label: string; value: number }[] = [
     { label: '月ごとの再生回数', value: 0 },
   ];
 
-  protected selectedDatasetId: number = 0;
+  selectedDatasetId: number = 0;
 
-  protected selectedChannelId: number = 0;
+  selectedChannelId: number = 0;
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['datasetList']) {
