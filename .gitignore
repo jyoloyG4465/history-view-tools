@@ -22,3 +22,5 @@ __pycache__/
 
 .vscode
 .env
+.pytest_cache
+.mypy_cache
