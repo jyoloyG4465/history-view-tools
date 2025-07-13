@@ -2,11 +2,9 @@ name: Run Tests
 
 on: 
   push:
-    branches:
-      - main # mainブランチへのプッシュ時に実行
+    branches: [develop/1.0.0]
   pull_request:
-    branches:
-      - main # mainブランチへのプルリクエスト時に実行
+    branches: [develop/1.0.0]
 
 jobs:
   test:
