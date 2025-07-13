@@ -1,0 +1,48 @@
+name: Run Tests
+
+on: 
+  push:
+    branches:
+      - main # mainブランチへのプッシュ時に実行
+  pull_request:
+    branches:
+      - main # mainブランチへのプルリクエスト時に実行
+
+jobs:
+  test:
+    runs-on: ubuntu-latest # Ubuntu環境で実行
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4 # リポジトリのコードをチェックアウト
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3 # Docker Buildxをセットアップ（ビルド高速化のため）
+
+      - name: Cache Docker layers
+        uses: actions/cache@v4
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
+
+      - name: Build and Run Docker Compose Tests
+        run: |
+          # .envファイルの内容を環境変数として設定
+          # テスト用のDB情報なので、ここでは直接設定します。
+          # 本番環境のDB情報などはGitHub Secretsを使用することを強く推奨します。
+          export DB_NAME=test_db
+          export DB_USER=test_user
+          export DB_PASSWORD=test_password
+          export DB_HOST=databases
+          export DB_PORT=5432
+
+          # Docker Composeでテストを実行
+          # --build: イメージを再ビルド
+          # --abort-on-container-exit: テストコンテナが終了したら他のコンテナも停止
+          docker-compose -f docker-compose.test.yml up --build --abort-on-container-exit
+
+      - name: Clean up Docker containers
+        if: always() # 前のステップが失敗しても必ず実行
+        run: docker-compose -f docker-compose.test.yml down -v # コンテナとボリュームを削除
