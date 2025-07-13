@@ -15,13 +15,13 @@ describe('DatasetListComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        DatasetCardComponent,
         CommonModule,
         TranslateModule.forRoot(),
+        DatasetCardComponent,
         DatasetListComponent,
-        provideHttpClient(),
         NgxsModule.forRoot([DatasetState]),
       ],
+      providers: [provideHttpClient()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(DatasetListComponent);
