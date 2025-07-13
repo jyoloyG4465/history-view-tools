@@ -4,6 +4,7 @@ import { DatasetCardComponent } from './dataset-card/dataset-card.component';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { Dataset } from '@app/model/dataset';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('DatasetListComponent', () => {
   let component: DatasetListComponent;
@@ -17,6 +18,7 @@ describe('DatasetListComponent', () => {
         TranslateModule.forRoot(),
         DatasetListComponent, // Standalone Componentの場合
       ],
+      providers: [provideHttpClient()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(DatasetListComponent);
@@ -30,8 +32,18 @@ describe('DatasetListComponent', () => {
 
   it('should display dataset cards when datasetList is provided', () => {
     const testDatasets: Dataset[] = [
-      { datasetId: 1, datasetName: 'Test Dataset 1', startDate: '2023-01-01', endDate: '2023-01-31' },
-      { datasetId: 2, datasetName: 'Test Dataset 2', startDate: '2023-02-01', endDate: '2023-02-28' },
+      {
+        datasetId: 1,
+        datasetName: 'Test Dataset 1',
+        startDate: '2023-01-01',
+        endDate: '2023-01-31',
+      },
+      {
+        datasetId: 2,
+        datasetName: 'Test Dataset 2',
+        startDate: '2023-02-01',
+        endDate: '2023-02-28',
+      },
     ];
     component.datasetList = testDatasets;
     fixture.detectChanges();
