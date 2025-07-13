@@ -8,7 +8,7 @@ import { DatasetStateFacade } from '@app/shared/state/dataset/dataset.state.faca
 import { AnalysisStateFacade } from './state/analysis.state.facade';
 import { BehaviorSubject, of } from 'rxjs'; // BehaviorSubjectをインポート
 import { Dataset } from '@app/model/dataset';
-import { NgxEchartsModule } from 'ngx-echarts';
+import { NGX_ECHARTS_CONFIG } from 'ngx-echarts';
 
 describe('AnalysisComponent', () => {
   let component: AnalysisComponent;
@@ -48,13 +48,11 @@ describe('AnalysisComponent', () => {
         AnalysisEditComponent,
         AnalysisGraphComponent,
         AnalysisComponent,
-        NgxEchartsModule.forRoot({
-          echarts: () => import('echarts'),
-        }),
       ],
       providers: [
         { provide: DatasetStateFacade, useValue: mockDatasetStateFacade },
         { provide: AnalysisStateFacade, useValue: mockAnalysisStateFacade },
+        NGX_ECHARTS_CONFIG,
       ],
     }).compileComponents();
 
