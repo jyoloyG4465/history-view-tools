@@ -7,23 +7,24 @@ on:
     branches: [develop/1.0.0]
 
 jobs:
-  black-check:
+  format-check:
     runs-on: ubuntu-latest
 
     steps:
-    - name: checkout
+    - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: setup Python
+    - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.11'  # 必要に応じて変更
+        python-version: '3.11'
 
-    - name: isntall black and isort
-      run: pip install black isort
+    - name: Install Black and isort
+      run: |
+        pip install black==24.3.0 isort==5.12.0
 
-    - name: check isort
+    - name: Run isort check
       run: isort . --check-only --diff
 
-    - name: check black 
-      run: black --check .
+    - name: Run black check
+      run: black . --check
