@@ -56,9 +56,9 @@
     `.env` ファイルの例:
 
     ```
-    DB_NAME=youtube_history_db
-    DB_USER=user
-    DB_PASSWORD=password
+    DB_NAME=postgres
+    DB_USER=pguser
+    DB_PASSWORD=pgpassword
     DB_HOST=databases
     DB_PORT=5432
     ```
@@ -92,8 +92,6 @@
 │       ├── backend-formatter.yaml
 │       ├── frontend-test.yaml
 │       └── test.yaml
-├── .mypy_cache/              # MyPy のキャッシュ
-├── .venv/                    # Python 仮想環境
 ├── containers/
 │   ├── api-server/           # バックエンドAPIサーバーのDocker関連ファイルとソースコード
 │   │   ├── Dockerfile        # APIサーバーのDockerイメージ定義
