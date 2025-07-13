@@ -1,0 +1,32 @@
+services:
+  test-runner:
+    build: ./containers/api-server
+    container_name: test-runner
+    volumes:
+      - ./containers/api-server:/code
+    environment:
+      DB_NAME: test_${DB_NAME} # テスト用のDB名を指定
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_HOST: test-databases # ここを修正
+      DB_PORT: ${DB_PORT}
+    working_dir: /code
+    command: >
+      sh -c "
+        pip install -r requirements-tests.txt &&
+        /usr/local/bin/pytest tests/
+      "
+    depends_on:
+      - databases
+
+  databases:
+    image: postgres:15
+    container_name: test-databases
+    ports:
+      - "5433:5432" # ホストのポートが本番用と衝突しないように変更
+    environment:
+      POSTGRES_DB: test_${DB_NAME} # テスト用のDB名を指定
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - ./postgres_test_data:/var/lib/postgresql/data # テスト用DBのデータ永続化先

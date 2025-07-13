@@ -1,0 +1,9 @@
+django>=4.2
+djangorestframework>=3.14
+pandas>=2.0
+django-cors-headers>=4.7
+psycopg2-binary>=2.9
+debugpy>=1.8.14
+sqlalchemy>=2.0
+pytest>=8.4.1
+pytest-django>=4.11.1
