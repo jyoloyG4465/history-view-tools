@@ -12,4 +12,5 @@ pytz==2025.2
 six==1.17.0
 sqlparse==0.5.3
 tzdata==2025.2
-isort==6.0.1
+isort==5.13.2
+black==24.3.0
