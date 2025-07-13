@@ -8,6 +8,7 @@ import { DatasetListComponent } from './dataset-list/dataset-list.component';
 import { DatasetStateFacade } from '@app/shared/state/dataset/dataset.state.facade';
 import { BehaviorSubject } from 'rxjs';
 import { Dataset } from '@app/model/dataset';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('DatasetComponent', () => {
   let component: DatasetComponent;
@@ -17,8 +18,12 @@ describe('DatasetComponent', () => {
 
   beforeEach(async () => {
     datasetsSubject = new BehaviorSubject<Dataset[]>([]);
-    mockDatasetStateFacade = jasmine.createSpyObj('DatasetStateFacade', ['fetchDatasetList']);
-    Object.defineProperty(mockDatasetStateFacade, 'datasets$', { value: datasetsSubject.asObservable() });
+    mockDatasetStateFacade = jasmine.createSpyObj('DatasetStateFacade', [
+      'fetchDatasetList',
+    ]);
+    Object.defineProperty(mockDatasetStateFacade, 'datasets$', {
+      value: datasetsSubject.asObservable(),
+    });
 
     await TestBed.configureTestingModule({
       imports: [
@@ -28,6 +33,7 @@ describe('DatasetComponent', () => {
         DatasetImportComponent,
         DatasetListComponent,
         DatasetComponent, // Standalone Componentの場合
+        HttpClientModule, // これを追加
       ],
       providers: [
         { provide: DatasetStateFacade, useValue: mockDatasetStateFacade },
@@ -48,10 +54,17 @@ describe('DatasetComponent', () => {
   });
 
   it('should expose datasetList$ from DatasetStateFacade', () => {
-    const testDatasets: Dataset[] = [{ datasetId: 1, datasetName: 'Test Dataset', startDate: '2023-01-01', endDate: '2023-01-31' }];
+    const testDatasets: Dataset[] = [
+      {
+        datasetId: 1,
+        datasetName: 'Test Dataset',
+        startDate: '2023-01-01',
+        endDate: '2023-01-31',
+      },
+    ];
     datasetsSubject.next(testDatasets);
     fixture.detectChanges();
-    component.datasetList$.subscribe(datasets => {
+    component.datasetList$.subscribe((datasets) => {
       expect(datasets).toEqual(testDatasets);
     });
   });
