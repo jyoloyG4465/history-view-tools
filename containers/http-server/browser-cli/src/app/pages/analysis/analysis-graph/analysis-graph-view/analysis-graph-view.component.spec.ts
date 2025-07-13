@@ -84,7 +84,7 @@ describe('AnalysisGraphViewComponent', () => {
     fixture.detectChanges();
 
     component.chartOptions$.subscribe((options: any) => {
-      expect(options.series && options.series[0].type).toBe('bar');
+      expect(options.series && options.series[0].type).toBe('horizonalBar');
       expect(options.xAxis).toEqual({ type: 'value' });
       expect(options.yAxis).toEqual({ type: 'category', data: ['2023-01'] });
       done();
